@@ -1,0 +1,15 @@
+module-name:
+    NarrativeTest
+
+module-description:
+    A KBase module with very very simple methods meant to test the capabilities of the Narrative Interface. These will be used (in the long run) to mimic various success and failure conditions and make sure that the Narrative Interface can respond to them correctly.
+
+service-language:
+    python
+
+module-version:
+    0.0.1
+
+owners:
+    [wjriehl]
+
