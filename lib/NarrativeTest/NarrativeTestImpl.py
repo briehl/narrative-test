@@ -12,21 +12,26 @@ class NarrativeTest:
     '''
     Module Name:
     NarrativeTest
+
     Module Description:
-    
+    A KBase module: NarrativeTest
     '''
-    
+
     ######## WARNING FOR GEVENT USERS #######
     # Since asynchronous IO can lead to methods - even the same method -
     # interrupting each other, you must be *very* careful when using global
     # state. A method could easily clobber the state set by another while
     # the latter method is running.
     #########################################
+    VERSION = "0.0.1"
+    GIT_URL = "https://github.com/briehl/narrative-test"
+    GIT_COMMIT_HASH = "407b5e2a5b4d25f470466d466b2eaef894a246c7"
+    
     #BEGIN_CLASS_HEADER
     # Class variables and functions can be defined in this block
     workspaceURL = None
     #END_CLASS_HEADER
-    
+
     # config contains contents of config file in a hash or None if it couldn't
     # be found
     def __init__(self, config):
@@ -34,6 +39,7 @@ class NarrativeTest:
         self.workspaceURL = config['workspace-url']
         #END_CONSTRUCTOR
         pass
+    
 
     def filter_contigs(self, ctx, params):
         # ctx is the context object
@@ -202,10 +208,30 @@ class NarrativeTest:
         print('returning:'+pformat(returnVal))
                 
         #END filter_contigs
-        
+
         # At some point might do deeper type checking...
-        if not isinstance(returnVal, object):
-            raise ValueError('Method count_contigs return value ' +
-                             'returnVal is not type object as required.')
+        if not isinstance(returnVal, dict):
+            raise ValueError('Method filter_contigs return value ' +
+                             'returnVal is not type dict as required.')
         # return the results
+        return [returnVal]
+
+    def test_async_job(self, ctx, params):
+        # ctx is the context object
+        # return variables are: returnVal
+        #BEGIN test_async_job
+        #END test_async_job
+
+        # At some point might do deeper type checking...
+        if not isinstance(returnVal, dict):
+            raise ValueError('Method test_async_job return value ' +
+                             'returnVal is not type dict as required.')
+        # return the results
+        return [returnVal]
+
+    def status(self, ctx):
+        #BEGIN_STATUS
+        returnVal = {'state': "OK", 'message': "", 'version': self.VERSION, 
+                     'git_url': self.GIT_URL, 'git_commit_hash': self.GIT_COMMIT_HASH}
+        #END_STATUS
         return [returnVal]

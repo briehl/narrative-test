@@ -10,7 +10,7 @@
         "input": "kbaseInputTest",
         "output": null
     },
-    "parameters": [ 
+    "parameters": [
         {
             "id": "media_id",
             "optional": false,
@@ -27,7 +27,7 @@
         "service-mapping": {
             "url": "",
             "name": "NarrativeTest",
-            "method": "input_test",
+            "method": "test_input_widget",
             "input_mapping": [
                 {
                     "narrative_system_variable": "workspace",

@@ -1,0 +1,303 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "wjriehl"
+    ],
+    "contact": "help@kbase.us",
+    "visible": true,
+    "categories": ["active"],
+    "widgets": {
+        "input": null,
+        "output": "kbaseGenomeView"
+    },
+    "parameters": [
+        {
+            "id": "actual_input_object",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseGenomes.Genome" ]
+            }
+        },
+        {
+            "id": "actual_output_object",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseGenomes.Genome" ],
+                "is_output_name": true
+            }
+        },
+        {
+            "id": "single_int",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int",
+                "min_int": -100,
+                "max_int": 100
+            }
+        },
+        {
+            "id": "list_of_ints",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int",
+                "min_int": -100,
+                "max_int": 100
+            }
+        },
+        {
+            "id": "single_float",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": -55.5,
+                "max_float": 55.5
+            }
+        },
+        {
+            "id": "list_of_floats",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": -55.5,
+                "max_float": 55.5
+            }
+        },
+        {
+            "id": "single_string",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text"
+        },
+        {
+            "id": "list_of_strings",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "text"
+        },
+        {
+            "id": "single_ws_object",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "allowed_ws_types": ["KBaseGenomes.Genome", "KBaseFBA.FBAModel"]
+            }
+        },
+        {
+            "id": "list_of_ws_objects",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "allowed_ws_types": ["KBaseGenomes.Genome", "KBaseFBA.FBAModel"]
+            }
+        },
+        {
+            "id": "dropdown_selection",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [
+                    {
+                        "value": "apple",
+                        "display": "Apple"
+                    },
+                    {
+                        "value": "banana",
+                        "display": "Banana"
+                    },
+                    {
+                        "value": "carrot",
+                        "display": "Carrot"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "list_of_dropdown_selections",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [
+                    {
+                        "value": "apple",
+                        "display": "Apple"
+                    },
+                    {
+                        "value": "banana",
+                        "display": "Banana"
+                    },
+                    {
+                        "value": "carrot",
+                        "display": "Carrot"
+                    }
+                ]
+
+            }
+        },
+        {
+            "id": "single_checkbox",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+                "checked_value": 1,
+                "unchecked_value": 0
+            }
+        },
+        {
+            "id": "list_of_checkboxes",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+                "checked_value": 100,
+                "unchecked_value": 50
+            }
+        },
+        {
+            "id": "single_textarea",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "textarea",
+            "textarea_options": {
+                "n_rows": 4
+            }
+        },
+        {
+            "id": "list_of_textareas",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "textarea",
+            "textarea_options": {
+                "n_rows": 3
+            }
+        },
+        {
+            "id": "model_for_subdata",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "allowed_ws_types": ["KBaseFBA.FBAModel"]
+            }
+        },
+        {
+            "id": "single_textsubdata",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "textsubdata",
+            "textsubdata_options": {
+              "subdata_selection": {
+                "parameter_id" : "model_for_subdata",
+                "subdata_included" : ["modelcompounds/[*]/id", "modelcompounds/[*]/name","modelcompounds/[*]/formula"],
+                "path_to_subdata": ["modelcompounds"],
+                "selection_id" : "id",
+                "selection_description" : ["name","formula"],
+                "description_template" :"- {{name}} ({{formula}})"
+              },
+              "multiselection":true,
+              "show_src_obj":false,
+              "allow_custom":false
+            }
+        }
+    ],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "NarrativeTest",
+            "method": "test_async_job",
+            "input_mapping": [
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_property": "workspace"
+                },
+                {
+                    "input_parameter": "actual_input_object",
+                    "target_property": "input_genome_name"
+                },
+                {
+                    "input_parameter": "actual_output_object",
+                    "target_property": "output_genome_name"
+                }
+            ],
+            "output_mapping": [
+                {
+                    "service_method_output_path": [0,"report_name"],
+                    "target_property": "report_name"
+                },
+                {
+                    "service_method_output_path": [0,"report_ref"],
+                    "target_property": "report_ref"
+                },
+                {
+                    "constant_value": "16",
+                    "target_property": "report_window_line_height"
+                },
+                {
+                    "service_method_output_path": [0],
+                    "target_property": "contig_filter_result"
+                },
+                {
+                    "input_parameter": "actual_output_object",
+                    "target_property": "id"
+                },
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_property": "ws"
+                }
+            ]
+        }
+    },
+    "job_id_output_field": "docker"
+}
