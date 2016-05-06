@@ -186,18 +186,6 @@
             }
         },
         {
-            "id": "list_of_checkboxes",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": true,
-            "default_values": [ "" ],
-            "field_type": "checkbox",
-            "checkbox_options": {
-                "checked_value": 100,
-                "unchecked_value": 50
-            }
-        },
-        {
             "id": "single_textarea",
             "optional": true,
             "advanced": false,
