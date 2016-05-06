@@ -3,19 +3,7 @@
 #
 name: Test Input Parameters
 tooltip: |
-    Used for testing that input parameters are properly validated. Here are the cases that need checking.
-    1. Single int with required range
-    2. List of ints with required range
-    3. Single float (list is covered in 2) with required range
-    4. Single string
-    5. List of strings
-    6. Single string with regex
-    7. Single WS object (multiple types acceptable)
-    8. List of WS objects
-    9. Dropdown selector (strings)
-    10. List of dropdown selectors
-    11. Some above required, some not
-    12. One workspace object as output
+    Used for testing that input parameters are properly validated.
 screenshots: []
 
 icon: icon.png
