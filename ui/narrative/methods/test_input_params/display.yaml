@@ -92,11 +92,6 @@ parameters :
             A single checkbox
         short-hint : |
             Accepts just True or False, should auto-map to actual value
-    list_of_checkboxes:
-        ui-name : |
-            Multiple checkboxes
-        short-hint : |
-            A list of booleans. Not sure when these will get used, but WHY NOT.
     single_textarea:
         ui-name : |
             Single textarea
