@@ -64,6 +64,11 @@ parameters :
             Single floating point number
         short-hint : |
             Only accept a single float between [-55.5, 55.5]
+    list_of_floats :
+        ui-name : |
+            Multiple floating point numbers
+        short-hint : |
+            Accept multiple floating point numbers between [-55.5, 55.5]
     single_string :
         ui-name : |
             Single random string

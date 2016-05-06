@@ -27,7 +27,7 @@
         "service-mapping": {
             "url": "",
             "name": "NarrativeTest",
-            "method": "test_input_widget",
+            "method": "filter_contigs",
             "input_mapping": [
                 {
                     "narrative_system_variable": "workspace",

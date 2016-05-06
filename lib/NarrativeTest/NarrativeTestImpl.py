@@ -238,8 +238,8 @@ class NarrativeTest:
 
         try:
             info = wsClient.copy_object({
-                       'from': {'ref': workspace_name + '/' + input_genome_id},
-                       'to': {'ref': workspace_name + '/' + output_genome_id}
+                       'from': {'ref': workspace_name + '/' + input_genome_name},
+                       'to': {'ref': workspace_name + '/' + output_genome_name}
                    })
         except:
             exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -271,7 +271,7 @@ class NarrativeTest:
             if 'provenance' in ctx:
                 provenance = ctx['provenance']
 
-            provenance[0]['input_ws_objects']=[workspace_name+'/'+input_genome_id]
+            provenance[0]['input_ws_objects']=[workspace_name+'/'+input_genome_name]
             report_info_list = wsClient.save_objects({
                     'id':info[6],
                     'objects':[
@@ -298,10 +298,7 @@ class NarrativeTest:
         returnVal = {
                 'report_name': reportName,
                 'report_ref': str(report_info[6]) + '/' + str(report_info[0]) + '/' + str(report_info[4]),
-                'new_contigset_ref': str(info[6]) + '/'+str(info[0])+'/'+str(info[4]),
-                'n_initial_contigs':n_total,
-                'n_contigs_removed':n_total-n_remaining,
-                'n_contigs_remaining':n_remaining
+                'new_genome_ref': str(info[6]) + '/'+str(info[0])+'/'+str(info[4])
             }
 
         #END test_async_job
