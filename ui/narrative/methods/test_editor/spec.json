@@ -17,7 +17,7 @@
             "advanced": false,
             "allow_multiple": false,
             "default_values": [ "foo" ],
-            "field_type": "text",
+            "field_type": "reads_group_editor",
             "text_options": {
             }
         }
