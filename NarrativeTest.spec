@@ -62,4 +62,6 @@ module NarrativeTest {
         Asynchronously copies a genome into another genome. Ta-daaa!
     */
     funcdef test_async_job(TestAsyncJobParams params) returns (TestAsyncJobResults) authentication required;
+
+    funcdef test_editor(string editor) returns (string) authentication required;
 };

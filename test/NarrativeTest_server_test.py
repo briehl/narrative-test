@@ -109,4 +109,11 @@ class NarrativeTestTest(unittest.TestCase):
         new_obj = self.getWsClient().get_objects([{'ref': self.getWsName() + '/' + output_name}])[0]['data']
         self.assertEqual(original_obj, new_obj)
 
+    def test_test_editor_job_ok(self):
+        input_str = "foo!"
+        expected = "I got a string - {}".format(input_str)
+
+        ret = self.getImpl().test_editor(self.getContext(), input_str)
+        self.assertEqual(ret[0], expected)
+
 

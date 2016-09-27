@@ -23,10 +23,6 @@ class NarrativeTest:
     # state. A method could easily clobber the state set by another while
     # the latter method is running.
     #########################################
-    VERSION = "0.0.1"
-    GIT_URL = "https://github.com/briehl/narrative-test"
-    GIT_COMMIT_HASH = "407b5e2a5b4d25f470466d466b2eaef894a246c7"
-
     #BEGIN_CLASS_HEADER
     # Class variables and functions can be defined in this block
     workspaceURL = None
@@ -39,7 +35,6 @@ class NarrativeTest:
         self.workspaceURL = config['workspace-url']
         #END_CONSTRUCTOR
         pass
-
 
     def filter_contigs(self, ctx, params):
         # ctx is the context object
@@ -310,9 +305,21 @@ class NarrativeTest:
         # return the results
         return [returnVal]
 
-    def status(self, ctx):
-        #BEGIN_STATUS
-        returnVal = {'state': "OK", 'message': "", 'version': self.VERSION,
-                     'git_url': self.GIT_URL, 'git_commit_hash': self.GIT_COMMIT_HASH}
-        #END_STATUS
+    def test_editor(self, ctx, editor):
+        # ctx is the context object
+        # return variables are: returnVal
+        #BEGIN test_editor
+
+        if not isinstance(editor, basestring):
+            raise ValueError('Expected the given input - {} - to be of type basestring, got {} instead.'.format(editor, type(editor).__name__))
+
+        returnVal = "I got a string - {}".format(editor)
+
+        #END test_editor
+
+        # At some point might do deeper type checking...
+        if not isinstance(returnVal, basestring):
+            raise ValueError('Method test_editor return value ' +
+                             'returnVal is not type basestring as required.')
+        # return the results
         return [returnVal]
