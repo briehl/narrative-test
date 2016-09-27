@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #BEGIN_HEADER
 # The header block is where all import statments should live
 import sys
@@ -23,9 +24,36 @@ class NarrativeTest:
     # state. A method could easily clobber the state set by another while
     # the latter method is running.
     #########################################
+    VERSION = "0.0.1"
+    GIT_URL = "https://github.com/briehl/narrative-test"
+    GIT_COMMIT_HASH = "49128bd40f90584ea41d8ed697e54d9480b8d90a"
+
     #BEGIN_CLASS_HEADER
     # Class variables and functions can be defined in this block
     workspaceURL = None
+
+    def _save_report(self, base_report_name, report_obj, provenance, ws_name, token):
+        """
+        Raises the usual exceptions if there's a failure while saving.
+        """
+        wsClient = workspaceService(self.workspaceURL, token=token)
+
+        report_name = '{}_{}'.format(base_report_name, str(hex(uuid.getnode())))
+        report_info_list = None
+        report_info_list = wsClient.save_objects({
+            'workspace': ws_name,
+            'objects': [
+                {
+                    'type': 'KBaseReport.Report',
+                    'data': report_obj,
+                    'name': report_name,
+                    'meta': {},
+                    'hidden': 1, # important!  make sure the report is hidden
+                    'provenance': provenance
+                }
+            ]
+        })
+        return report_info_list[0]
     #END_CLASS_HEADER
 
     # config contains contents of config file in a hash or None if it couldn't
@@ -36,7 +64,23 @@ class NarrativeTest:
         #END_CONSTRUCTOR
         pass
 
+
     def filter_contigs(self, ctx, params):
+        """
+        Filter contigs in a ContigSet by DNA length
+        :param params: instance of type "FilterContigsParams" -> structure:
+           parameter "workspace" of type "workspace_name" (A string
+           representing a workspace name.), parameter "contigset_id" of type
+           "contigset_id" (A string representing a ContigSet id.), parameter
+           "min_length" of Long
+        :returns: instance of type "FilterContigsResults" -> structure:
+           parameter "report_name" of String, parameter "report_ref" of
+           String, parameter "new_contigset_ref" of type "ws_contigset_id"
+           (The workspace ID for a ContigSet data object. @id ws
+           KBaseGenomes.ContigSet), parameter "n_initial_contigs" of Long,
+           parameter "n_contigs_removed" of Long, parameter
+           "n_contigs_remaining" of Long
+        """
         # ctx is the context object
         # return variables are: returnVal
         #BEGIN filter_contigs
@@ -164,35 +208,18 @@ class NarrativeTest:
             'text_message':report
         }
 
-        # generate a unique name for the Method report
-        reportName = 'filter_contigs_report_'+str(hex(uuid.getnode()))
-        report_info_list = None
         try:
-            report_info_list = wsClient.save_objects({
-                    'id':info[6],
-                    'objects':[
-                        {
-                            'type':'KBaseReport.Report',
-                            'data':reportObj,
-                            'name':reportName,
-                            'meta':{},
-                            'hidden':1, # important!  make sure the report is hidden
-                            'provenance':provenance
-                        }
-                    ]
-                })
+            report_info = self._save_report('filter_contigs_report', reportObj, provenance, workspace_name, token)
         except:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             lines = traceback.format_exception(exc_type, exc_value, exc_traceback)
             orig_error = ''.join('    ' + line for line in lines)
             raise ValueError('Error saving filtered ContigSet object to workspace:\n' + orig_error)
 
-        report_info = report_info_list[0]
-
         print('saved Report: '+pformat(report_info))
 
         returnVal = {
-                'report_name': reportName,
+                'report_name': report_info[1],
                 'report_ref': str(report_info[6]) + '/' + str(report_info[0]) + '/' + str(report_info[4]),
                 'new_contigset_ref': str(info[6]) + '/'+str(info[0])+'/'+str(info[4]),
                 'n_initial_contigs':n_total,
@@ -212,6 +239,20 @@ class NarrativeTest:
         return [returnVal]
 
     def test_async_job(self, ctx, params):
+        """
+        Asynchronously copies a genome into another genome. Ta-daaa!
+        :param params: instance of type "TestAsyncJobParams" -> structure:
+           parameter "workspace" of type "workspace_name" (A string
+           representing a workspace name.), parameter "input_genome_name" of
+           type "genome_name", parameter "output_genome_name" of type
+           "genome_name"
+        :returns: instance of type "TestAsyncJobResults" (The workspace ID
+           for a ContigSet data object. @id ws KBaseGenomes.ContigSet) ->
+           structure: parameter "report_name" of String, parameter
+           "report_ref" of String, parameter "new_genome_ref" of type
+           "ws_contigset_id" (The workspace ID for a ContigSet data object.
+           @id ws KBaseGenomes.ContigSet)
+        """
         # ctx is the context object
         # return variables are: returnVal
         #BEGIN test_async_job
@@ -258,40 +299,23 @@ class NarrativeTest:
             'text_message':report
         }
 
-        # generate a unique name for the Method report
-        reportName = 'test_async_job_report_'+str(hex(uuid.getnode()))
-        report_info_list = None
         try:
             provenance = [{}]
             if 'provenance' in ctx:
                 provenance = ctx['provenance']
-
             provenance[0]['input_ws_objects']=[workspace_name+'/'+input_genome_name]
-            report_info_list = wsClient.save_objects({
-                    'id':info[6],
-                    'objects':[
-                        {
-                            'type':'KBaseReport.Report',
-                            'data':reportObj,
-                            'name':reportName,
-                            'meta':{},
-                            'hidden':1, # important!  make sure the report is hidden
-                            'provenance':provenance
-                        }
-                    ]
-                })
-        except:
+
+            report_info = self._save_report('test_async_job_report', reportObj, provenance, workspace_name, token)
+        except Exception as e:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             lines = traceback.format_exception(exc_type, exc_value, exc_traceback)
             orig_error = ''.join('    ' + line for line in lines)
             raise ValueError('Error saving report object to workspace:\n' + orig_error)
 
-        report_info = report_info_list[0]
-
         print('saved Report: '+pformat(report_info))
 
         returnVal = {
-                'report_name': reportName,
+                'report_name': report_info[1],
                 'report_ref': str(report_info[6]) + '/' + str(report_info[0]) + '/' + str(report_info[4]),
                 'new_genome_ref': str(info[6]) + '/'+str(info[0])+'/'+str(info[4])
             }
@@ -305,21 +329,57 @@ class NarrativeTest:
         # return the results
         return [returnVal]
 
-    def test_editor(self, ctx, editor):
+    def test_editor(self, ctx, editor, workspace):
+        """
+        :param editor: instance of String
+        :param workspace: instance of type "workspace_name" (A string
+           representing a workspace name.)
+        :returns: instance of type "TestEditorResults" -> structure:
+           parameter "report_name" of String, parameter "report_ref" of
+           String, parameter "output" of String
+        """
         # ctx is the context object
         # return variables are: returnVal
         #BEGIN test_editor
 
         if not isinstance(editor, basestring):
             raise ValueError('Expected the given input - {} - to be of type basestring, got {} instead.'.format(editor, type(editor).__name__))
+        if not isinstance(workspace, basestring):
+            raise ValueError('Expected a workspace name as a string, got {}'.workspace)
 
-        returnVal = "I got a string - {}".format(editor)
+        value = "I got a string - {}".format(editor)
+
+        reportObj = {
+            'objects_created': [],
+            'text_message': "This method doesn't do jack, except pollute your workspace with a report.\nYOU'RE WELCOME."
+        }
+        try:
+            provenance = ctx.get('provenance', [{}])
+            report_info = self._save_report('test_editor_report', reportObj, provenance, workspace, ctx['token'])
+        except:
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            lines = traceback.format_exception(exc_type, exc_value, exc_traceback)
+            orig_error = ''.join('    ' + line for line in lines)
+            raise ValueError('Error saving report object to workspace:\n' + orig_error)
+
+        returnVal = {
+            'value': value,
+            'report_name': report_info[1],
+            'report_ref': str(report_info[6]) + '/' + str(report_info[0]) + '/' + str(report_info[4])
+        }
 
         #END test_editor
 
         # At some point might do deeper type checking...
-        if not isinstance(returnVal, basestring):
+        if not isinstance(returnVal, dict):
             raise ValueError('Method test_editor return value ' +
-                             'returnVal is not type basestring as required.')
+                             'returnVal is not type dict as required.')
         # return the results
+        return [returnVal]
+
+    def status(self, ctx):
+        #BEGIN_STATUS
+        returnVal = {'state': "OK", 'message': "", 'version': self.VERSION,
+                     'git_url': self.GIT_URL, 'git_commit_hash': self.GIT_COMMIT_HASH}
+        #END_STATUS
         return [returnVal]

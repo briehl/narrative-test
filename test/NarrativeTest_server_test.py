@@ -113,7 +113,7 @@ class NarrativeTestTest(unittest.TestCase):
         input_str = "foo!"
         expected = "I got a string - {}".format(input_str)
 
-        ret = self.getImpl().test_editor(self.getContext(), input_str)
-        self.assertEqual(ret[0], expected)
+        ret = self.getImpl().test_editor(self.getContext(), input_str, self.getWsName())
+        self.assertEqual(ret[0]['value'], expected)
 
 

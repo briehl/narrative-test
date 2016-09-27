@@ -31,6 +31,10 @@
                 {
                     "input_parameter": "string_input",
                     "target_argument_position": 0
+                },
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_argument_position": 1
                 }
             ],
             "output_mapping": [

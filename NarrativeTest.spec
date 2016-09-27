@@ -63,5 +63,11 @@ module NarrativeTest {
     */
     funcdef test_async_job(TestAsyncJobParams params) returns (TestAsyncJobResults) authentication required;
 
-    funcdef test_editor(string editor) returns (string) authentication required;
+    typedef structure {
+        string report_name;
+        string report_ref;
+        string output;
+    } TestEditorResults;
+
+    funcdef test_editor(string editor, workspace_name workspace) returns (TestEditorResults) authentication required;
 };
