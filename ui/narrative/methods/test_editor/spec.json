@@ -1,0 +1,53 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "wjriehl"
+    ],
+    "contact": "help@kbase.us",
+    "visible": true,
+    "categories": ["active"],
+    "widgets": {
+        "input": null,
+        "output": null
+    },
+    "parameters": [
+        {
+            "id": "string_input",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "foo" ],
+            "field_type": "text",
+            "text_options": {
+            }
+        }
+    ],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "NarrativeTest",
+            "method": "test_editor",
+            "input_mapping": [
+                {
+                    "input_parameter": "string_input",
+                    "target_argument_position": 0
+                }
+            ],
+            "output_mapping": [
+                {
+                    "service_method_output_path": [0,"report_name"],
+                    "target_property": "report_name"
+                },
+                {
+                    "service_method_output_path": [0,"report_ref"],
+                    "target_property": "report_ref"
+                },
+                {
+                    "service_method_output_path": [0,"value"],
+                    "target_property": "out_value"
+                }
+            ]
+        }
+    },
+    "job_id_output_field": "docker"
+}
