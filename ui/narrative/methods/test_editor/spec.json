@@ -7,9 +7,8 @@
     "visible": true,
     "categories": ["active"],
     "widgets": {
-        "input": null,
-        "output": null,
-        "editor": "reads_set"
+        "input": "reads_set_editor",
+        "output": null
     },
     "parameters": [
         {
