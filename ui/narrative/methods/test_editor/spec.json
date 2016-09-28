@@ -8,7 +8,8 @@
     "categories": ["active"],
     "widgets": {
         "input": null,
-        "output": null
+        "output": null,
+        "editor": "reads_set"
     },
     "parameters": [
         {
