@@ -6,6 +6,7 @@
     "contact": "help@kbase.us",
     "visible": true,
     "categories": ["active"],
+    "app_type": "editor",
     "widgets": {
         "input": "reads_set_editor",
         "output": null
