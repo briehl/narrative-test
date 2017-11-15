@@ -56,7 +56,7 @@
     "behavior": {
         "service-mapping": {
             "url": "",
-            "name": "NarrativeTestOld",
+            "name": "NarrativeTest",
             "method": "test_param_groups",
             "input_mapping": [
                 {

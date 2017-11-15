@@ -180,7 +180,7 @@
     "service-mapping" :
     {
       "url" : "",
-      "name" : "NarrativeTestOld",
+      "name" : "NarrativeTest",
       "method" : "import_reads_from_staging",
       "input_mapping" :
       [

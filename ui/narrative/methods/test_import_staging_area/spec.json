@@ -27,7 +27,7 @@
     "behavior": {
         "service-mapping": {
             "url": "",
-            "name": "NarrativeTestOld",
+            "name": "NarrativeTest",
             "method": "generic_test",
             "input_mapping": [
                 {

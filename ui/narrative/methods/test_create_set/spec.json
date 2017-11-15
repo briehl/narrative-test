@@ -77,7 +77,7 @@
     "behavior": {
         "service-mapping": {
             "url": "",
-            "name": "NarrativeTestOld",
+            "name": "NarrativeTest",
             "method": "save_reads_set_v1",
             "input_mapping": [
                 {

@@ -243,7 +243,7 @@
     "behavior": {
         "service-mapping": {
             "url": "",
-            "name": "NarrativeTestOld",
+            "name": "NarrativeTest",
             "method": "test_async_job",
             "input_mapping": [
                 {
