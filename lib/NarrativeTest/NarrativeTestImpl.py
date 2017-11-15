@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #BEGIN_HEADER
 from kb_uploadmethods.kb_uploadmethodsClient import kb_uploadmethods
+import os
 #END_HEADER
 
 
@@ -30,6 +31,7 @@ class NarrativeTest:
     # be found
     def __init__(self, config):
         #BEGIN_CONSTRUCTOR
+        self.callbackURL = os.environ['SDK_CALLBACK_URL']
         #END_CONSTRUCTOR
         pass
 
