@@ -1,0 +1,37 @@
+#
+# define display information
+#
+name: Test Input Widget
+tooltip: |
+    Tests input widgets by just loading a simple, predefined widget.
+    This one just has a KBaseBiochem.Media object as an input.
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    media_id :
+        ui-name : |
+            Media object
+        short-hint : |
+            A media object to test loading
+description : |
+    <p>This is a tiny method intended for just loading a custom input widget for testing.</p>

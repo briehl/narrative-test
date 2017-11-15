@@ -1,0 +1,64 @@
+#
+# define display information
+#
+name: Test Create Set
+tooltip: |
+    Tests creating a set with the Set API.
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    description :
+        ui-name : |
+            A String
+        short-hint : |
+            A description string.
+    output_object :
+        ui-name : |
+            Output Object name
+        short-hint : |
+            Gotta be a string.
+    input_reads_label :
+        ui-name : |
+            Reads Object label.
+        short-hint : |
+            Reads Object label string.
+    input_reads_obj :
+        ui-name : |
+            Reads data object
+        short-hint : |
+            Should be of type KBaseFile.SingleEndLibrary or KBaseFile.PairedEndLibrary
+    input_reads_metadata :
+        ui-name : |
+            Reads Metadata mapping.
+        short-hint : |
+            Should be string-to-string key-value pairs.
+
+parameter-groups :
+    reads_tuple :
+        ui-name : |
+            Set of reads items.
+        short-hint : |
+            Group of parameters for each set of reads.
+
+description : |
+    <p>This is a tiny method intended for testing creating a Reads Set through the Set API.</p>

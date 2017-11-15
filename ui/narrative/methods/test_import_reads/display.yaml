@@ -1,0 +1,50 @@
+#
+# define display information
+#
+name: Test Import Reads from Staging Area
+tooltip: |
+    Import some reads files into Assembly objects.
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            [annotate_contigset]
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    file_path_list:
+        ui-name : Paths to reads files
+        short-hint : Paths to reads files
+    reads_id:
+        ui-name : Name of the reads object
+        short-hint : Name of the reads object
+    outward:
+        ui-name : flag is set to 1 if reads in the pair point outward
+        short-hint : flag is set to 1 if reads in the pair point outward
+    insert_size:
+        ui-name : Insert size
+        short-hint : Insert size
+    std_dev:
+        ui-name : Standard deviation
+        short-hint : Standard deviation
+    reads_type:
+        ui-name :  Reads type
+        short-hint : Reads type
+
+description : |
+    <p>This is a methods uploads a read set fasta or fastq into shock.</p>

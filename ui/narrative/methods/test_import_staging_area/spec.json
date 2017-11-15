@@ -1,0 +1,59 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "wjriehl"
+    ],
+    "contact": "help@kbase.us",
+    "visible": true,
+    "categories": ["active"],
+    "widgets": {
+        "input": null,
+        "output": null
+    },
+    "parameters": [
+        {
+            "id": "file_input",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "dynamic_dropdown",
+            "text_options": {
+                "data_source": "ftp_staging"
+            },
+            "data_source": "ftp_staging"
+        }
+    ],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "NarrativeTestOld",
+            "method": "generic_test",
+            "input_mapping": [
+                {
+                    "input_parameter": "file_input",
+                    "target_property": "file_path"
+                },
+                {
+                    "narrative_system_variable": "workspace_id",
+                    "target_property": "workspace"
+                }
+            ],
+            "output_mapping": [
+                {
+                    "service_method_output_path": [0,"report_name"],
+                    "target_property": "report_name"
+                },
+                {
+                    "service_method_output_path": [0,"report_ref"],
+                    "target_property": "report_ref"
+                },
+                {
+                    "service_method_output_path": [0,"value"],
+                    "target_property": "out_value"
+                }
+            ]
+        }
+    },
+    "job_id_output_field": "docker"
+}

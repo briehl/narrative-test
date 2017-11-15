@@ -1,0 +1,215 @@
+# -*- coding: utf-8 -*-
+#BEGIN_HEADER
+from kb_uploadmethods.kb_uploadmethodsClient import kb_uploadmethods
+#END_HEADER
+
+
+class NarrativeTest:
+    '''
+    Module Name:
+    NarrativeTest
+
+    Module Description:
+    A KBase module: NarrativeTest
+    '''
+
+    ######## WARNING FOR GEVENT USERS ####### noqa
+    # Since asynchronous IO can lead to methods - even the same method -
+    # interrupting each other, you must be *very* careful when using global
+    # state. A method could easily clobber the state set by another while
+    # the latter method is running.
+    ######################################### noqa
+    VERSION = "0.0.1"
+    GIT_URL = ""
+    GIT_COMMIT_HASH = ""
+
+    #BEGIN_CLASS_HEADER
+    #END_CLASS_HEADER
+
+    # config contains contents of config file in a hash or None if it couldn't
+    # be found
+    def __init__(self, config):
+        #BEGIN_CONSTRUCTOR
+        #END_CONSTRUCTOR
+        pass
+
+
+    def test_async_job(self, ctx, params):
+        """
+        Asynchronously copies a genome into another genome. Ta-daaa!
+        :param params: instance of type "TestAsyncJobParams" -> structure:
+           parameter "workspace" of type "workspace_name" (A string
+           representing a workspace name.), parameter "input_genome_name" of
+           type "genome_name", parameter "output_genome_name" of type
+           "genome_name"
+        :returns: instance of type "TestAsyncJobResults" (The workspace ID
+           for a ContigSet data object. @id ws KBaseGenomes.ContigSet) ->
+           structure: parameter "report_name" of String, parameter
+           "report_ref" of String, parameter "new_genome_ref" of type
+           "ws_contigset_id"
+        """
+        # ctx is the context object
+        # return variables are: returnVal
+        #BEGIN test_async_job
+        #END test_async_job
+
+        # At some point might do deeper type checking...
+        if not isinstance(returnVal, dict):
+            raise ValueError('Method test_async_job return value ' +
+                             'returnVal is not type dict as required.')
+        # return the results
+        return [returnVal]
+
+    def test_editor(self, ctx, editor, workspace):
+        """
+        :param editor: instance of String
+        :param workspace: instance of type "workspace_name" (A string
+           representing a workspace name.)
+        :returns: instance of type "TestEditorResults" -> structure:
+           parameter "report_name" of String, parameter "report_ref" of
+           String, parameter "output" of String
+        """
+        # ctx is the context object
+        # return variables are: returnVal
+        #BEGIN test_editor
+        #END test_editor
+
+        # At some point might do deeper type checking...
+        if not isinstance(returnVal, dict):
+            raise ValueError('Method test_editor return value ' +
+                             'returnVal is not type dict as required.')
+        # return the results
+        return [returnVal]
+
+    def save_reads_set_v1(self, ctx, inputs):
+        """
+        :param inputs: instance of unspecified object
+        :returns: instance of unspecified object
+        """
+        # ctx is the context object
+        # return variables are: outputs
+        #BEGIN save_reads_set_v1
+        #END save_reads_set_v1
+
+        # At some point might do deeper type checking...
+        if not isinstance(outputs, object):
+            raise ValueError('Method save_reads_set_v1 return value ' +
+                             'outputs is not type object as required.')
+        # return the results
+        return [outputs]
+
+    def test_param_groups(self, ctx, params):
+        """
+        :param params: instance of type "TestParamGroupsParams" -> structure:
+           parameter "workspace" of type "workspace_name" (A string
+           representing a workspace name.), parameter "param_group" of list
+           of type "SimpleParamGroup" -> structure: parameter "genome_ref" of
+           String, parameter "free_text" of list of String, parameter "check"
+           of Long
+        :returns: instance of type "ReportOutput" -> structure: parameter
+           "report_name" of String, parameter "report_ref" of String
+        """
+        # ctx is the context object
+        # return variables are: returnVal
+        #BEGIN test_param_groups
+        #END test_param_groups
+
+        # At some point might do deeper type checking...
+        if not isinstance(returnVal, dict):
+            raise ValueError('Method test_param_groups return value ' +
+                             'returnVal is not type dict as required.')
+        # return the results
+        return [returnVal]
+
+    def test_input_mapping(self, ctx, params):
+        """
+        :param params: instance of type "SimpleTestObject" -> structure:
+           parameter "workspace" of type "workspace_id" (A string
+           representing a workspace id.), parameter "file_path" of String
+        :returns: instance of unspecified object
+        """
+        # ctx is the context object
+        # return variables are: outputs
+        #BEGIN test_input_mapping
+        #END test_input_mapping
+
+        # At some point might do deeper type checking...
+        if not isinstance(outputs, object):
+            raise ValueError('Method test_input_mapping return value ' +
+                             'outputs is not type object as required.')
+        # return the results
+        return [outputs]
+
+    def generic_test(self, ctx, params):
+        """
+        :param params: instance of unspecified object
+        :returns: instance of unspecified object
+        """
+        # ctx is the context object
+        # return variables are: outputs
+        #BEGIN generic_test
+        #END generic_test
+
+        # At some point might do deeper type checking...
+        if not isinstance(outputs, object):
+            raise ValueError('Method generic_test return value ' +
+                             'outputs is not type object as required.')
+        # return the results
+        return [outputs]
+
+    def import_reads_from_staging(self, ctx, params):
+        """
+        :param params: instance of type "UploadReadsParams" -> structure:
+           parameter "import_type" of String, parameter
+           "fastq_fwd_staging_file_name" of String, parameter
+           "fastq_rev_staging_file_name" of String, parameter
+           "sra_staging_file_name" of String, parameter "sequencing_tech" of
+           type "sequencing_tech" (sequencing_tech: sequencing technology
+           name: output reads file name workspace_name: workspace name/ID of
+           the object import_type: either FASTQ or SRA For files in user's
+           staging area: fastq_fwd_or_sra_staging_file_name: single-end fastq
+           file name Or forward/left paired-end fastq file name from user's
+           staging area Or SRA staging file fastq_rev_staging_file_name:
+           reverse/right paired-end fastq file name user's staging area e.g.
+           for file: /data/bulk/user_name/file_name staging_file_subdir_path
+           is file_name for file:
+           /data/bulk/user_name/subdir_1/subdir_2/file_name
+           staging_file_subdir_path is subdir_1/subdir_2/file_name Optional
+           Params: single_genome: whether the reads are from a single genome
+           or a metagenome. interleaved: whether reads is interleaved
+           insert_size_mean: mean (average) insert length
+           insert_size_std_dev: standard deviation of insert lengths
+           read_orientation_outward: whether reads in a pair point outward),
+           parameter "workspace_name" of type "workspace_name" (A string
+           representing a workspace name.), parameter "name" of String,
+           parameter "single_genome" of type "single_genome", parameter
+           "interleaved" of type "interleaved", parameter "insert_size_mean"
+           of type "insert_size_mean", parameter "insert_size_std_dev" of
+           type "insert_size_std_dev", parameter "read_orientation_outward"
+           of type "read_orientation_outward"
+        :returns: instance of type "UploadMethodResult" -> structure:
+           parameter "obj_ref" of type "obj_ref", parameter "report_name" of
+           type "report_name", parameter "report_ref" of type "report_ref"
+        """
+        # ctx is the context object
+        # return variables are: returnVal
+        #BEGIN import_reads_from_staging
+        upload_client = kb_uploadmethods(self.callbackURL)
+        returnVal = upload_client.import_reads_from_staging(params)
+        #END import_reads_from_staging
+
+        # At some point might do deeper type checking...
+        if not isinstance(returnVal, dict):
+            raise ValueError('Method import_reads_from_staging return value ' +
+                             'returnVal is not type dict as required.')
+        # return the results
+        return [returnVal]
+    def status(self, ctx):
+        #BEGIN_STATUS
+        returnVal = {'state': "OK",
+                     'message': "",
+                     'version': self.VERSION,
+                     'git_url': self.GIT_URL,
+                     'git_commit_hash': self.GIT_COMMIT_HASH}
+        #END_STATUS
+        return [returnVal]

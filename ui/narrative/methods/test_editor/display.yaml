@@ -1,0 +1,36 @@
+#
+# define display information
+#
+name: Test Editor
+tooltip: |
+    Tests using an Editor as an input parameter.
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    string_input :
+        ui-name : |
+            A String
+        short-hint : |
+            A string input for testing.
+description : |
+    <p>This is a tiny method intended for just loading a custom editor for testing.</p>

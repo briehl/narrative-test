@@ -1,0 +1,117 @@
+#
+# define display information
+#
+name: Test Input Parameters
+tooltip: |
+    Used for testing that input parameters are properly validated.
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    actual_input_object :
+        ui-name : |
+            Genome to be duplicated
+        short-hint : |
+            Should be a genome (KBaseGenomes.Genome)
+    actual_output_object :
+        ui-name : |
+            Name of new Genome
+        short-hint : |
+            The name of the new Genome object that gets created (a KBaseGenomes.Genome)
+    single_int :
+        ui-name : |
+            Single integer
+        short-hint : |
+            Only accept a single integer between [-100, 100]
+    list_of_ints :
+        ui-name : |
+            Multiple integers
+        short-hint : |
+            Accept multiple integers between [-100, 100]
+    single_float :
+        ui-name : |
+            Single floating point number
+        short-hint : |
+            Only accept a single float between [-55.5, 55.5]
+    list_of_floats :
+        ui-name : |
+            Multiple floating point numbers
+        short-hint : |
+            Accept multiple floating point numbers between [-55.5, 55.5]
+    single_string :
+        ui-name : |
+            Single random string
+        short-hint : |
+            Just validate that it is a something.
+    list_of_strings :
+        ui-name : |
+            Multiple strings
+        short-hint : |
+            Accept multple random strings
+    single_ws_object :
+        ui-name : |
+            A single ws object
+        short-hint : |
+            Accepts both KBaseGenomes.Genome or KBaseFBA.FBAModel
+    list_of_ws_objects :
+        ui-name : |
+            Multiple ws objects
+        short-hint : |
+            Accepts both KBaseGenomes.Genome or KBaseFBA.FBAModel
+    dropdown_selection :
+        ui-name : |
+            Dropdown of random strings
+        short-hint : |
+            Should only accept what is in that dropdown.
+    list_of_dropdown_selections:
+        ui-name : |
+            Multiple dropdown results
+        short-hint : |
+            Should accept only what is in the dropdown, but a list of them.
+    single_checkbox:
+        ui-name : |
+            A single checkbox
+        short-hint : |
+            Accepts just True or False, should auto-map to actual value
+    single_textarea:
+        ui-name : |
+            Single textarea
+        short-hint : |
+            A textarea
+    list_of_textareas:
+        ui-name : |
+            A list of textareas.
+        short-hint : |
+            Maybe you want to write an article with lots of paragraphs?
+    model_for_subdata:
+        ui-name : |
+            A single FBA model for subdata selection
+        short-hint : |
+            This is the FBA model that will be used for populating subdata selection
+    single_textsubdata :
+        ui-name : |
+            A single fancy text subdata
+        short-hint : |
+            Used for a KBaseFBA.FBAModel (as in the example spec)
+description : |
+    <p>This is a tiny method intended for just automated testing that parameters of different forms validate (or not) as expected.</p>
+    <p>It still runs, though! All it does is make a copy of a genome. Kinda boring, yes, but it's mainly for testing and validation.</p>

@@ -1,0 +1,56 @@
+#
+# define display information
+#
+name: Test Parameter Groups
+tooltip: |
+    Used to show off the parameter grouping mechanism, and test that it works.
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    genome_ref :
+        ui-name : |
+            A Genome
+        short-hint : |
+            What do you want here? Pick a Genome!
+    free_text :
+        ui-name : |
+            Some Free Text fields.
+        short-hint : |
+            Just type some stuff, and it'll show up in the results.
+    check :
+        ui-name : |
+            A Checkbox.
+        short-hint : |
+            Check it. Or don't. I'm a tooltip, not your boss.
+
+parameter-groups :
+    param_group :
+        ui-name : |
+            Parameter Group
+        short-hint : |
+            You just get one parameter group here. Use it wisely.
+
+description : |
+    <p>This App just shows off and tests parameter groups. That's it. Nothing fancy.
+    <p>It takes in your inputs, and returns them somewhat formatted in a report view.
+    Hopefully, it's useful for whoever wants to set up parameter groups.

@@ -1,0 +1,36 @@
+#
+# define display information
+#
+name: Test Import from Staging Area
+tooltip: |
+    Tests using a special Staging Area dropdown to set file input.
+screenshots: []
+
+icon:
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    file_input :
+        ui-name : |
+            A File
+        short-hint : |
+            A file input for testing.
+description : |
+    <p>This is a tiny method intended for just testing a specialized dropdown for importing files.</p>
