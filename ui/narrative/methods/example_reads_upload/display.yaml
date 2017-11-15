@@ -1,4 +1,4 @@
-name     : (TEST) Import FASTQ/SRA File as Reads from Staging Area
+name     : TEST Import FASTQ/SRA File as Reads from Staging Area
 subtitle : Import a FASTQ/SRA file into your Narrative as a Reads data object
 tooltip  : Import a FASTQ/SRA file into your Narrative as a Reads data object
 
