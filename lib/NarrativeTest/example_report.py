@@ -66,7 +66,7 @@ class ExampleReport(object):
             'direct_html_link_index': 0,
             'html_links': [{
                 'shock_id': shock_id,
-                'name': 'example_report',
+                'name': 'index.html',
                 'description': 'Just an example report'
             }],
             'report_object_name': 'NarrativeTest.example_report' + str(uuid.uuid4()),
