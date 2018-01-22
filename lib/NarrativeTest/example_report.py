@@ -55,7 +55,7 @@ class ExampleReport(object):
         return report_dir
 
     def _upload_report(self, report_dir, workspace_id):
-        upload_info = self.dfu.file_to_shock({
+        upload_info = self.dfu_client.file_to_shock({
             'file_path': report_dir,
             'pack': 'zip'
         })
