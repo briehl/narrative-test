@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #BEGIN_HEADER
 from kb_uploadmethods.kb_uploadmethodsClient import kb_uploadmethods
+from NarrativeTest.example_report import ExampleReport
 import os
 #END_HEADER
 
@@ -21,8 +22,8 @@ class NarrativeTest:
     # the latter method is running.
     ######################################### noqa
     VERSION = "0.0.1"
-    GIT_URL = ""
-    GIT_COMMIT_HASH = ""
+    GIT_URL = "https://github.com/briehl/narrative-test"
+    GIT_COMMIT_HASH = "b3e459e82bb8b9bf2441a1a66d1729e3b51d4bbf"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -32,6 +33,7 @@ class NarrativeTest:
     def __init__(self, config):
         #BEGIN_CONSTRUCTOR
         self.callbackURL = os.environ['SDK_CALLBACK_URL']
+        self.scratch_dir = config['scratch']
         #END_CONSTRUCTOR
         pass
 
@@ -206,6 +208,29 @@ class NarrativeTest:
                              'returnVal is not type dict as required.')
         # return the results
         return [returnVal]
+
+    def example_report(self, ctx, params):
+        """
+        :param params: instance of type "ExampleReportParams" -> structure:
+           parameter "text_input" of String, parameter "checkbox_input" of
+           Long, parameter "workspace_id" of Long
+        :returns: instance of type "ExampleReportResult" -> structure:
+           parameter "report_name" of type "report_name", parameter
+           "report_ref" of type "report_ref"
+        """
+        # ctx is the context object
+        # return variables are: result
+        #BEGIN example_report
+        report_maker = ExampleReport(self.callbackURL, self.scratch_dir)
+        result = report_maker.run(params)
+        #END example_report
+
+        # At some point might do deeper type checking...
+        if not isinstance(result, dict):
+            raise ValueError('Method example_report return value ' +
+                             'result is not type dict as required.')
+        # return the results
+        return [result]
     def status(self, ctx):
         #BEGIN_STATUS
         returnVal = {'state': "OK",

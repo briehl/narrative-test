@@ -146,6 +146,19 @@ class NarrativeTest(object):
             'NarrativeTest.import_reads_from_staging',
             [params], self._service_ver, context)
 
+    def example_report(self, params, context=None):
+        """
+        :param params: instance of type "ExampleReportParams" -> structure:
+           parameter "text_input" of String, parameter "checkbox_input" of
+           Long, parameter "workspace_id" of Long
+        :returns: instance of type "ExampleReportResult" -> structure:
+           parameter "report_name" of type "report_name", parameter
+           "report_ref" of type "report_ref"
+        """
+        return self._client.call_method(
+            'NarrativeTest.example_report',
+            [params], self._service_ver, context)
+
     def status(self, context=None):
         return self._client.call_method('NarrativeTest.status',
                                         [], self._service_ver, context)

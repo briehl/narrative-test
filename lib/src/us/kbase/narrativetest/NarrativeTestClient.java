@@ -285,6 +285,23 @@ public class NarrativeTestClient {
         return res.get(0);
     }
 
+    /**
+     * <p>Original spec-file function name: example_report</p>
+     * <pre>
+     * </pre>
+     * @param   params   instance of type {@link us.kbase.narrativetest.ExampleReportParams ExampleReportParams}
+     * @return   parameter "result" of type {@link us.kbase.narrativetest.ExampleReportResult ExampleReportResult}
+     * @throws IOException if an IO exception occurs
+     * @throws JsonClientException if a JSON RPC exception occurs
+     */
+    public ExampleReportResult exampleReport(ExampleReportParams params, RpcContext... jsonRpcContext) throws IOException, JsonClientException {
+        List<Object> args = new ArrayList<Object>();
+        args.add(params);
+        TypeReference<List<ExampleReportResult>> retType = new TypeReference<List<ExampleReportResult>>() {};
+        List<ExampleReportResult> res = caller.jsonrpcCall("NarrativeTest.example_report", args, retType, true, true, jsonRpcContext, this.serviceVersion);
+        return res.get(0);
+    }
+
     public Map<String, Object> status(RpcContext... jsonRpcContext) throws IOException, JsonClientException {
         List<Object> args = new ArrayList<Object>();
         TypeReference<List<Map<String, Object>>> retType = new TypeReference<List<Map<String, Object>>>() {};

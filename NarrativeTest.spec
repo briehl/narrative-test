@@ -138,4 +138,18 @@ module NarrativeTest {
     funcdef import_reads_from_staging(UploadReadsParams params)
       returns (UploadMethodResult returnVal) authentication required;
 
+    typedef structure {
+      string text_input;
+      int checkbox_input;
+      int workspace_id;
+    } ExampleReportParams;
+
+    typedef structure {
+      report_name report_name;
+      report_ref report_ref;
+    } ExampleReportResult;
+
+    funcdef example_report(ExampleReportParams params)
+      returns (ExampleReportResult result) authentication required;
+
 };
