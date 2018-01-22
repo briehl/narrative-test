@@ -3,6 +3,7 @@ from DataFileUtil.DataFileUtilClient import DataFileUtil
 import uuid
 import os
 import errno
+import shutil
 
 
 class ExampleReport(object):
@@ -30,20 +31,29 @@ class ExampleReport(object):
         # make the directory
         report_dir = os.path.join(self.scratch_dir, str(uuid.uuid4()))
         self._mkdir_p(report_dir)
+        shutil.copy('/kb/module/lib/NarrativeTest/Kbase_Logo_web.png', report_dir)
         # make some example content
         report_file_content = """
         <html>
         <body>
-        <p>
-        I am an HTML report. Here's my contents:
-        <br>
-        <b>Text input:</b><pre>
-        {}
-        </pre>
-        <br>
-        <b>Checkbox checked?</b>
-        <br>
-        {}
+        <div>
+            I am an HTML report. Here's my contents:
+        </div>
+        <div>
+            <b>Text input:</b>
+            <pre>
+            {}
+            </pre>
+        </div>
+        <div>
+            <b>Checkbox checked?</b>
+            <br>
+            {}
+        </div>
+        <div>
+            <b>Here's a picture</b>
+            <img src="Kbase_Logo_web.png" width="500px"/>
+        </div>
         </body>
         </html>
         """.format(text, "yes" if checked == 1 else "no")
