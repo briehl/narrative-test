@@ -52,6 +52,7 @@ class ExampleReport(object):
         </div>
         <div>
             <b>Here's a picture</b>
+            <br>
             <img src="Kbase_Logo_web.png" width="500px"/>
         </div>
         </body>
