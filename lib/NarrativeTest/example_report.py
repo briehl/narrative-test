@@ -18,12 +18,12 @@ class ExampleReport(object):
         * text_input = some random string for the report
         * checkbox_input = a checkbox so we can add other params
         """
-        ws_id = params.get('workspace_id', None)
-        if ws_id is None:
-            raise ValueError('workspace_id is required!')
+        ws_name = params.get('workspace_name', None)
+        if ws_name is None:
+            raise ValueError('workspace_name is required!')
         report_dir = self._build_report(params.get('text_input', ''),
                                         params.get('checkbox_input', 0))
-        results = self._upload_report(report_dir, ws_id)
+        results = self._upload_report(report_dir, ws_name)
         return results
 
     def _build_report(self, text, checked):
@@ -54,7 +54,7 @@ class ExampleReport(object):
             report_file.write(report_file_content)
         return report_dir
 
-    def _upload_report(self, report_dir, workspace_id):
+    def _upload_report(self, report_dir, workspace_name):
         upload_info = self.dfu_client.file_to_shock({
             'file_path': report_dir,
             'pack': 'zip'
@@ -70,7 +70,7 @@ class ExampleReport(object):
                 'description': 'Just an example report'
             }],
             'report_object_name': 'NarrativeTest.example_report' + str(uuid.uuid4()),
-            'workspace_id': workspace_id,
+            'workspace_name': workspace_name
         }
         report = self.report_client.create_extended_report(report_params)
         return {

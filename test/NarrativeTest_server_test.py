@@ -66,8 +66,14 @@ class NarrativeTestTest(unittest.TestCase):
         suffix = int(time.time() * 1000)
         wsName = "test_NarrativeTest_" + str(suffix)
         ret = self.getWsClient().create_workspace({'workspace': wsName})  # noqa
+        self.__class__.wsId = ret[0]
         self.__class__.wsName = wsName
         return wsName
+
+    def getWsId(self):
+        if not hasattr(self.__class__, 'wsId'):
+            self.getWsName()
+        return self.__class__.wsId
 
     def getImpl(self):
         return self.__class__.serviceImpl
@@ -87,3 +93,18 @@ class NarrativeTestTest(unittest.TestCase):
         # Check returned data with
         # self.assertEqual(ret[...], ...) or other unittest methods
         pass
+
+    def test_example_report(self):
+        print('I AM TESTING')
+        print(self.getWsId())
+        print(self.getWsName())
+        report_result = self.getImpl().example_report(
+            self.getContext(),
+            {
+                'workspace_name': self.getWsName(),
+                'text_input': 'i am text. hear me mumble.',
+                'checkbox_input': 1
+            }
+        )[0]
+        self.assertIn('report_ref', report_result)
+        self.assertIn('report_name', report_result)

@@ -141,7 +141,7 @@ module NarrativeTest {
     typedef structure {
       string text_input;
       int checkbox_input;
-      int workspace_id;
+      string workspace_name;
     } ExampleReportParams;
 
     typedef structure {
