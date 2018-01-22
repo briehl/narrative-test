@@ -6,7 +6,7 @@ import errno
 
 
 class ExampleReport(object):
-    def __init__(self, scratch_dir, callback_url):
+    def __init__(self, callback_url, scratch_dir):
         self.scratch_dir = scratch_dir
         self.report_client = KBaseReport(callback_url)
         self.dfu_client = DataFileUtil(callback_url)
