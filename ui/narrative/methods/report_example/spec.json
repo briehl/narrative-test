@@ -1,0 +1,76 @@
+{
+  "ver" : "1.0.0",
+  "authors" : ["wjriehl"],
+  "contact" : "help@kbase.us",
+  "visible" : true,
+  "categories" : [ "inactive","reads","upload" ],
+  "widgets" :
+  {
+    "input" : null,
+    "output" : "no-display"
+  },
+  "parameters" :
+  [
+    {
+      "id" : "text_input",
+      "optional" : true,
+      "advanced" : false,
+      "allow_multiple" : false,
+      "default_values" : [ "" ],
+      "field_type" : "text",
+      "text_options" : {}
+    },
+    {
+      "id": "checkbox_input",
+      "optional":false,
+      "advanced":false,
+      "allow_multiple":false,
+      "default_values":[1],
+      "field_type" : "checkbox",
+      "checkbox_options":{
+        "checked_value": 1,
+        "unchecked_value": 0
+        }
+    }
+  ],
+  "behavior" :
+  {
+    "service-mapping" :
+    {
+      "url" : "",
+      "name" : "NarrativeTest",
+      "method" : "example_report",
+      "input_mapping" :
+      [
+        {
+          "narrative_system_variable": "workspace_id",
+          "target_property": "workspace_id"
+        },
+        {
+          "input_parameter": "text_input",
+          "target_property": "text_input"
+        },
+        {
+          "input_parameter": "checkbox_input",
+          "target_property": "checkbox_input"
+        }
+      ],
+      "output_mapping" :
+      [
+        {
+            "service_method_output_path": [0, "report_name"],
+            "target_property": "report_name"
+        },
+        {
+            "service_method_output_path": [0, "report_ref"],
+            "target_property": "report_ref"
+        },
+        {
+            "constant_value": "16",
+            "target_property": "report_window_line_height"
+        }
+      ]
+    }
+  },
+  "job_id_output_field": "docker"
+}

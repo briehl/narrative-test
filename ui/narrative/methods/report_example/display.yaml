@@ -1,0 +1,34 @@
+name     : Example HTML Report
+subtitle : Show an example HTML Report
+tooltip  : Show an example HTML Report
+
+screenshots :
+    []
+
+suggestions :
+    apps:
+        related :
+            []
+        next :
+            []
+    methods:
+        related :
+            []
+        next :
+            []
+
+parameters :
+    text_input:
+        ui-name: Text Input
+        short-hint: Add some text for your report
+        long-hint: Some input test goes here
+
+    checkbox_input:
+        ui-name: Checkbox Input
+        short-hint: Show this off in your report
+        long-hint: Your report will show this being checked or not
+
+description : |
+    <p>Demonstrate a KBase HTML Report using some simple inputs.</p>
+
+technical-description : none
