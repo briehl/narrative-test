@@ -1,0 +1,72 @@
+{
+  "ver" : "1.0.0",
+  "authors" : ["wjriehl"],
+  "contact" : "help@kbase.us",
+  "visible" : true,
+  "categories" : [ ],
+  "widgets" :
+  {
+    "input" : null,
+    "output" : "kbaseDefaultNarrativeOutput"
+  },
+  "parameters" :
+  [
+    {
+      "id" : "string_1",
+      "optional" : true,
+      "advanced" : false,
+      "allow_multiple" : false,
+      "default_values" : [ "" ],
+      "field_type" : "text",
+      "text_options" : {}
+    },
+    {
+      "id": "string_2",
+      "optional":false,
+      "advanced":false,
+      "allow_multiple":false,
+      "default_values":[1],
+      "field_type" : "checkbox",
+      "checkbox_options":{
+        "checked_value": 1,
+        "unchecked_value": 0
+        }
+    }
+  ],
+  "behavior" :
+  {
+    "service-mapping" :
+    {
+      "url" : "",
+      "name" : "NarrativeTest",
+      "method" : "introspect_job_info",
+      "input_mapping" :
+      [
+        {
+          "input_parameter": "string_1",
+          "target_property": "param1"
+        },
+        {
+          "input_parameter": "string_2",
+          "target_property": "param2"
+        }
+      ],
+      "output_mapping" :
+      [
+        {
+          "service_method_output_path": [0, "context"],
+          "target_property": "context"
+        },
+        {
+          "service_method_output_path": [0, "params"],
+          "target_property": "params"
+        },
+        {
+          "service_method_output_path": [0, "config"],
+          "target_property": "config"
+        }
+      ]
+    }
+  },
+  "job_id_output_field": "docker"
+}

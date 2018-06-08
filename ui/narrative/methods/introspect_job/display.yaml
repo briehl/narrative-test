@@ -1,0 +1,34 @@
+name     : Introspect Job
+subtitle : Introspect the information provided to an app
+tooltip  : Introspect the information provided to an app
+
+screenshots :
+    []
+
+suggestions :
+    apps:
+        related :
+            []
+        next :
+            []
+    methods:
+        related :
+            []
+        next :
+            []
+
+parameters :
+    string_1:
+        ui-name: Text Input 1
+        short-hint: Some dummy text
+        long-hint: Some dummy text
+
+    string_2:
+        ui-name: Text Input 2
+        short-hint: Some more dummy text
+        long-hint: Some more dummy text
+
+description : |
+    <p>Just returns the information submitted to a job. If a token is in the context object where it's expected, it gets scrubbed out.</p>
+
+technical-description : none

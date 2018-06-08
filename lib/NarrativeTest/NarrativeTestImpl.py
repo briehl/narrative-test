@@ -2,6 +2,7 @@
 #BEGIN_HEADER
 from kb_uploadmethods.kb_uploadmethodsClient import kb_uploadmethods
 from NarrativeTest.example_report import ExampleReport
+from copy import deepcopy
 import os
 #END_HEADER
 
@@ -23,7 +24,7 @@ class NarrativeTest:
     ######################################### noqa
     VERSION = "0.0.1"
     GIT_URL = "https://github.com/briehl/narrative-test"
-    GIT_COMMIT_HASH = "b3e459e82bb8b9bf2441a1a66d1729e3b51d4bbf"
+    GIT_COMMIT_HASH = "be11b8565ec27d8d1df75b3f26862dbf4a738e5b"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -213,7 +214,7 @@ class NarrativeTest:
         """
         :param params: instance of type "ExampleReportParams" -> structure:
            parameter "text_input" of String, parameter "checkbox_input" of
-           Long, parameter "workspace_id" of Long
+           Long, parameter "workspace_name" of String
         :returns: instance of type "ExampleReportResult" -> structure:
            parameter "report_name" of type "report_name", parameter
            "report_ref" of type "report_ref"
@@ -228,6 +229,38 @@ class NarrativeTest:
         # At some point might do deeper type checking...
         if not isinstance(result, dict):
             raise ValueError('Method example_report return value ' +
+                             'result is not type dict as required.')
+        # return the results
+        return [result]
+
+    def introspect_job_info(self, ctx, params):
+        """
+        :param params: instance of type "IntrospectParams" -> structure:
+           parameter "param1" of String, parameter "param2" of String
+        :returns: instance of type "IntrospectResult" -> structure: parameter
+           "context" of unspecified object, parameter "params" of type
+           "IntrospectParams" -> structure: parameter "param1" of String,
+           parameter "param2" of String
+        """
+        # ctx is the context object
+        # return variables are: result
+        #BEGIN introspect_job_info
+        context_copy = deepcopy(ctx)
+        if "token" in context_copy:
+            context_copy["token"] = "lol, no"
+        config_copy = deepcopy(self.config)
+        if "token" in config_copy:
+            config_copy["token"] = "lol, no"
+        result = {
+            "context": context_copy,
+            "config": config_copy,
+            "params": params
+        }
+        #END introspect_job_info
+
+        # At some point might do deeper type checking...
+        if not isinstance(result, dict):
+            raise ValueError('Method introspect_job_info return value ' +
                              'result is not type dict as required.')
         # return the results
         return [result]

@@ -302,6 +302,23 @@ public class NarrativeTestClient {
         return res.get(0);
     }
 
+    /**
+     * <p>Original spec-file function name: introspect_job_info</p>
+     * <pre>
+     * </pre>
+     * @param   params   instance of type {@link us.kbase.narrativetest.IntrospectParams IntrospectParams}
+     * @return   parameter "result" of type {@link us.kbase.narrativetest.IntrospectResult IntrospectResult}
+     * @throws IOException if an IO exception occurs
+     * @throws JsonClientException if a JSON RPC exception occurs
+     */
+    public IntrospectResult introspectJobInfo(IntrospectParams params, RpcContext... jsonRpcContext) throws IOException, JsonClientException {
+        List<Object> args = new ArrayList<Object>();
+        args.add(params);
+        TypeReference<List<IntrospectResult>> retType = new TypeReference<List<IntrospectResult>>() {};
+        List<IntrospectResult> res = caller.jsonrpcCall("NarrativeTest.introspect_job_info", args, retType, true, true, jsonRpcContext, this.serviceVersion);
+        return res.get(0);
+    }
+
     public Map<String, Object> status(RpcContext... jsonRpcContext) throws IOException, JsonClientException {
         List<Object> args = new ArrayList<Object>();
         TypeReference<List<Map<String, Object>>> retType = new TypeReference<List<Map<String, Object>>>() {};

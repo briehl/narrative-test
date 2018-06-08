@@ -150,13 +150,26 @@ class NarrativeTest(object):
         """
         :param params: instance of type "ExampleReportParams" -> structure:
            parameter "text_input" of String, parameter "checkbox_input" of
-           Long, parameter "workspace_id" of Long
+           Long, parameter "workspace_name" of String
         :returns: instance of type "ExampleReportResult" -> structure:
            parameter "report_name" of type "report_name", parameter
            "report_ref" of type "report_ref"
         """
         return self._client.call_method(
             'NarrativeTest.example_report',
+            [params], self._service_ver, context)
+
+    def introspect_job_info(self, params, context=None):
+        """
+        :param params: instance of type "IntrospectParams" -> structure:
+           parameter "param1" of String, parameter "param2" of String
+        :returns: instance of type "IntrospectResult" -> structure: parameter
+           "context" of unspecified object, parameter "params" of type
+           "IntrospectParams" -> structure: parameter "param1" of String,
+           parameter "param2" of String
+        """
+        return self._client.call_method(
+            'NarrativeTest.introspect_job_info',
             [params], self._service_ver, context)
 
     def status(self, context=None):

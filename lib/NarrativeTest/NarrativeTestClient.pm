@@ -817,7 +817,7 @@ $result is a NarrativeTest.ExampleReportResult
 ExampleReportParams is a reference to a hash where the following keys are defined:
 	text_input has a value which is a string
 	checkbox_input has a value which is an int
-	workspace_id has a value which is an int
+	workspace_name has a value which is a string
 ExampleReportResult is a reference to a hash where the following keys are defined:
 	report_name has a value which is a NarrativeTest.report_name
 	report_ref has a value which is a NarrativeTest.report_ref
@@ -835,7 +835,7 @@ $result is a NarrativeTest.ExampleReportResult
 ExampleReportParams is a reference to a hash where the following keys are defined:
 	text_input has a value which is a string
 	checkbox_input has a value which is an int
-	workspace_id has a value which is an int
+	workspace_name has a value which is a string
 ExampleReportResult is a reference to a hash where the following keys are defined:
 	report_name has a value which is a NarrativeTest.report_name
 	report_ref has a value which is a NarrativeTest.report_ref
@@ -899,6 +899,100 @@ report_ref is a string
     }
 }
  
+
+
+=head2 introspect_job_info
+
+  $result = $obj->introspect_job_info($params)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$params is a NarrativeTest.IntrospectParams
+$result is a NarrativeTest.IntrospectResult
+IntrospectParams is a reference to a hash where the following keys are defined:
+	param1 has a value which is a string
+	param2 has a value which is a string
+IntrospectResult is a reference to a hash where the following keys are defined:
+	context has a value which is an UnspecifiedObject, which can hold any non-null object
+	params has a value which is a NarrativeTest.IntrospectParams
+
+</pre>
+
+=end html
+
+=begin text
+
+$params is a NarrativeTest.IntrospectParams
+$result is a NarrativeTest.IntrospectResult
+IntrospectParams is a reference to a hash where the following keys are defined:
+	param1 has a value which is a string
+	param2 has a value which is a string
+IntrospectResult is a reference to a hash where the following keys are defined:
+	context has a value which is an UnspecifiedObject, which can hold any non-null object
+	params has a value which is a NarrativeTest.IntrospectParams
+
+
+=end text
+
+=item Description
+
+
+
+=back
+
+=cut
+
+ sub introspect_job_info
+{
+    my($self, @args) = @_;
+
+# Authentication: required
+
+    if ((my $n = @args) != 1)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function introspect_job_info (received $n, expecting 1)");
+    }
+    {
+	my($params) = @args;
+
+	my @_bad_arguments;
+        (ref($params) eq 'HASH') or push(@_bad_arguments, "Invalid type for argument 1 \"params\" (value was \"$params\")");
+        if (@_bad_arguments) {
+	    my $msg = "Invalid arguments passed to introspect_job_info:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	    Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+								   method_name => 'introspect_job_info');
+	}
+    }
+
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "NarrativeTest.introspect_job_info",
+	    params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'introspect_job_info',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return wantarray ? @{$result->result} : $result->result->[0];
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method introspect_job_info",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'introspect_job_info',
+				       );
+    }
+}
+ 
   
 sub status
 {
@@ -942,16 +1036,16 @@ sub version {
             Bio::KBase::Exceptions::JSONRPC->throw(
                 error => $result->error_message,
                 code => $result->content->{code},
-                method_name => 'example_report',
+                method_name => 'introspect_job_info',
             );
         } else {
             return wantarray ? @{$result->result} : $result->result->[0];
         }
     } else {
         Bio::KBase::Exceptions::HTTP->throw(
-            error => "Error invoking method example_report",
+            error => "Error invoking method introspect_job_info",
             status_line => $self->{client}->status_line,
-            method_name => 'example_report',
+            method_name => 'introspect_job_info',
         );
     }
 }
@@ -1729,7 +1823,7 @@ report_ref has a value which is a NarrativeTest.report_ref
 a reference to a hash where the following keys are defined:
 text_input has a value which is a string
 checkbox_input has a value which is an int
-workspace_id has a value which is an int
+workspace_name has a value which is a string
 
 </pre>
 
@@ -1740,7 +1834,7 @@ workspace_id has a value which is an int
 a reference to a hash where the following keys are defined:
 text_input has a value which is a string
 checkbox_input has a value which is an int
-workspace_id has a value which is an int
+workspace_name has a value which is a string
 
 
 =end text
@@ -1773,6 +1867,70 @@ report_ref has a value which is a NarrativeTest.report_ref
 a reference to a hash where the following keys are defined:
 report_name has a value which is a NarrativeTest.report_name
 report_ref has a value which is a NarrativeTest.report_ref
+
+
+=end text
+
+=back
+
+
+
+=head2 IntrospectParams
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+param1 has a value which is a string
+param2 has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+param1 has a value which is a string
+param2 has a value which is a string
+
+
+=end text
+
+=back
+
+
+
+=head2 IntrospectResult
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+context has a value which is an UnspecifiedObject, which can hold any non-null object
+params has a value which is a NarrativeTest.IntrospectParams
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+context has a value which is an UnspecifiedObject, which can hold any non-null object
+params has a value which is a NarrativeTest.IntrospectParams
 
 
 =end text

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "text_input",
     "checkbox_input",
-    "workspace_id"
+    "workspace_name"
 })
 public class ExampleReportParams {
 
@@ -29,8 +29,8 @@ public class ExampleReportParams {
     private String textInput;
     @JsonProperty("checkbox_input")
     private Long checkboxInput;
-    @JsonProperty("workspace_id")
-    private Long workspaceId;
+    @JsonProperty("workspace_name")
+    private String workspaceName;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("text_input")
@@ -63,18 +63,18 @@ public class ExampleReportParams {
         return this;
     }
 
-    @JsonProperty("workspace_id")
-    public Long getWorkspaceId() {
-        return workspaceId;
+    @JsonProperty("workspace_name")
+    public String getWorkspaceName() {
+        return workspaceName;
     }
 
-    @JsonProperty("workspace_id")
-    public void setWorkspaceId(Long workspaceId) {
-        this.workspaceId = workspaceId;
+    @JsonProperty("workspace_name")
+    public void setWorkspaceName(String workspaceName) {
+        this.workspaceName = workspaceName;
     }
 
-    public ExampleReportParams withWorkspaceId(Long workspaceId) {
-        this.workspaceId = workspaceId;
+    public ExampleReportParams withWorkspaceName(String workspaceName) {
+        this.workspaceName = workspaceName;
         return this;
     }
 
@@ -90,7 +90,7 @@ public class ExampleReportParams {
 
     @Override
     public String toString() {
-        return ((((((((("ExampleReportParams"+" [textInput=")+ textInput)+", checkboxInput=")+ checkboxInput)+", workspaceId=")+ workspaceId)+", additionalProperties=")+ additionalProperties)+"]");
+        return ((((((((("ExampleReportParams"+" [textInput=")+ textInput)+", checkboxInput=")+ checkboxInput)+", workspaceName=")+ workspaceName)+", additionalProperties=")+ additionalProperties)+"]");
     }
 
 }

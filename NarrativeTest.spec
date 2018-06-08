@@ -152,4 +152,17 @@ module NarrativeTest {
     funcdef example_report(ExampleReportParams params)
       returns (ExampleReportResult result) authentication required;
 
+    typedef structure {
+        string param1;
+        string param2;
+    } IntrospectParams;
+
+    typedef structure {
+        UnspecifiedObject context;
+        UnspecifiedObject config;
+        IntrospectParams params;
+    } IntrospectResult;
+
+    funcdef introspect_job_info(IntrospectParams params) returns (IntrospectResult result) authentication required;
+
 };
