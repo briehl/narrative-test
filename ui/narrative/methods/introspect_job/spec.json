@@ -13,7 +13,7 @@
   [
     {
       "id" : "string_1",
-      "optional" : true,
+      "optional" : false,
       "advanced" : false,
       "allow_multiple" : false,
       "default_values" : [ "" ],
@@ -25,12 +25,9 @@
       "optional":false,
       "advanced":false,
       "allow_multiple":false,
-      "default_values":[1],
-      "field_type" : "checkbox",
-      "checkbox_options":{
-        "checked_value": 1,
-        "unchecked_value": 0
-        }
+      "default_values":[""],
+      "field_type" : "text",
+      "text_options": {}
     }
   ],
   "behavior" :

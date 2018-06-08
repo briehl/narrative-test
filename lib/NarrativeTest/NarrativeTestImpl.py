@@ -35,6 +35,7 @@ class NarrativeTest:
         #BEGIN_CONSTRUCTOR
         self.callbackURL = os.environ['SDK_CALLBACK_URL']
         self.scratch_dir = config['scratch']
+        self.config = config
         #END_CONSTRUCTOR
         pass
 
