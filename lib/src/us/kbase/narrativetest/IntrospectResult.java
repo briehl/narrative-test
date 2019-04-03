@@ -21,12 +21,15 @@ import us.kbase.common.service.UObject;
 @Generated("com.googlecode.jsonschema2pojo")
 @JsonPropertyOrder({
     "context",
+    "config",
     "params"
 })
 public class IntrospectResult {
 
     @JsonProperty("context")
     private UObject context;
+    @JsonProperty("config")
+    private UObject config;
     /**
      * <p>Original spec-file type: IntrospectParams</p>
      * 
@@ -48,6 +51,21 @@ public class IntrospectResult {
 
     public IntrospectResult withContext(UObject context) {
         this.context = context;
+        return this;
+    }
+
+    @JsonProperty("config")
+    public UObject getConfig() {
+        return config;
+    }
+
+    @JsonProperty("config")
+    public void setConfig(UObject config) {
+        this.config = config;
+    }
+
+    public IntrospectResult withConfig(UObject config) {
+        this.config = config;
         return this;
     }
 
@@ -88,7 +106,7 @@ public class IntrospectResult {
 
     @Override
     public String toString() {
-        return ((((((("IntrospectResult"+" [context=")+ context)+", params=")+ params)+", additionalProperties=")+ additionalProperties)+"]");
+        return ((((((((("IntrospectResult"+" [context=")+ context)+", config=")+ config)+", params=")+ params)+", additionalProperties=")+ additionalProperties)+"]");
     }
 
 }

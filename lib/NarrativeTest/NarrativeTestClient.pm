@@ -919,6 +919,7 @@ IntrospectParams is a reference to a hash where the following keys are defined:
 	param2 has a value which is a string
 IntrospectResult is a reference to a hash where the following keys are defined:
 	context has a value which is an UnspecifiedObject, which can hold any non-null object
+	config has a value which is an UnspecifiedObject, which can hold any non-null object
 	params has a value which is a NarrativeTest.IntrospectParams
 
 </pre>
@@ -934,6 +935,7 @@ IntrospectParams is a reference to a hash where the following keys are defined:
 	param2 has a value which is a string
 IntrospectResult is a reference to a hash where the following keys are defined:
 	context has a value which is an UnspecifiedObject, which can hold any non-null object
+	config has a value which is an UnspecifiedObject, which can hold any non-null object
 	params has a value which is a NarrativeTest.IntrospectParams
 
 
@@ -993,6 +995,97 @@ IntrospectResult is a reference to a hash where the following keys are defined:
     }
 }
  
+
+
+=head2 sample_dyn_service_call
+
+  $result = $obj->sample_dyn_service_call($params)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$params is a NarrativeTest.SampleCallParams
+$result is a NarrativeTest.SampleCallResult
+SampleCallParams is a reference to a hash where the following keys are defined:
+	input has a value which is a string
+SampleCallResult is a reference to a hash where the following keys are defined:
+	output has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+$params is a NarrativeTest.SampleCallParams
+$result is a NarrativeTest.SampleCallResult
+SampleCallParams is a reference to a hash where the following keys are defined:
+	input has a value which is a string
+SampleCallResult is a reference to a hash where the following keys are defined:
+	output has a value which is a string
+
+
+=end text
+
+=item Description
+
+A simple loopback function. The single string input is just returned as output. Useful for
+testing clients that talk to dynamic services.
+
+=back
+
+=cut
+
+ sub sample_dyn_service_call
+{
+    my($self, @args) = @_;
+
+# Authentication: none
+
+    if ((my $n = @args) != 1)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function sample_dyn_service_call (received $n, expecting 1)");
+    }
+    {
+	my($params) = @args;
+
+	my @_bad_arguments;
+        (ref($params) eq 'HASH') or push(@_bad_arguments, "Invalid type for argument 1 \"params\" (value was \"$params\")");
+        if (@_bad_arguments) {
+	    my $msg = "Invalid arguments passed to sample_dyn_service_call:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	    Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+								   method_name => 'sample_dyn_service_call');
+	}
+    }
+
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "NarrativeTest.sample_dyn_service_call",
+	    params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'sample_dyn_service_call',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return wantarray ? @{$result->result} : $result->result->[0];
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method sample_dyn_service_call",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'sample_dyn_service_call',
+				       );
+    }
+}
+ 
   
 sub status
 {
@@ -1036,16 +1129,16 @@ sub version {
             Bio::KBase::Exceptions::JSONRPC->throw(
                 error => $result->error_message,
                 code => $result->content->{code},
-                method_name => 'introspect_job_info',
+                method_name => 'sample_dyn_service_call',
             );
         } else {
             return wantarray ? @{$result->result} : $result->result->[0];
         }
     } else {
         Bio::KBase::Exceptions::HTTP->throw(
-            error => "Error invoking method introspect_job_info",
+            error => "Error invoking method sample_dyn_service_call",
             status_line => $self->{client}->status_line,
-            method_name => 'introspect_job_info',
+            method_name => 'sample_dyn_service_call',
         );
     }
 }
@@ -1920,6 +2013,7 @@ param2 has a value which is a string
 <pre>
 a reference to a hash where the following keys are defined:
 context has a value which is an UnspecifiedObject, which can hold any non-null object
+config has a value which is an UnspecifiedObject, which can hold any non-null object
 params has a value which is a NarrativeTest.IntrospectParams
 
 </pre>
@@ -1930,7 +2024,68 @@ params has a value which is a NarrativeTest.IntrospectParams
 
 a reference to a hash where the following keys are defined:
 context has a value which is an UnspecifiedObject, which can hold any non-null object
+config has a value which is an UnspecifiedObject, which can hold any non-null object
 params has a value which is a NarrativeTest.IntrospectParams
+
+
+=end text
+
+=back
+
+
+
+=head2 SampleCallParams
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+input has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+input has a value which is a string
+
+
+=end text
+
+=back
+
+
+
+=head2 SampleCallResult
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+output has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+output has a value which is a string
 
 
 =end text

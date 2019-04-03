@@ -164,12 +164,26 @@ class NarrativeTest(object):
         :param params: instance of type "IntrospectParams" -> structure:
            parameter "param1" of String, parameter "param2" of String
         :returns: instance of type "IntrospectResult" -> structure: parameter
-           "context" of unspecified object, parameter "params" of type
-           "IntrospectParams" -> structure: parameter "param1" of String,
-           parameter "param2" of String
+           "context" of unspecified object, parameter "config" of unspecified
+           object, parameter "params" of type "IntrospectParams" ->
+           structure: parameter "param1" of String, parameter "param2" of
+           String
         """
         return self._client.call_method(
             'NarrativeTest.introspect_job_info',
+            [params], self._service_ver, context)
+
+    def sample_dyn_service_call(self, params, context=None):
+        """
+        A simple loopback function. The single string input is just returned as output. Useful for
+        testing clients that talk to dynamic services.
+        :param params: instance of type "SampleCallParams" -> structure:
+           parameter "input" of String
+        :returns: instance of type "SampleCallResult" -> structure: parameter
+           "output" of String
+        """
+        return self._client.call_method(
+            'NarrativeTest.sample_dyn_service_call',
             [params], self._service_ver, context)
 
     def status(self, context=None):

@@ -7,7 +7,7 @@
   "widgets" :
   {
     "input" : null,
-    "output" : "kbaseDefaultNarrativeOutput"
+    "output" : "no-display"
   },
   "parameters" :
   [
