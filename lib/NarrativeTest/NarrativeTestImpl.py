@@ -22,9 +22,9 @@ class NarrativeTest:
     # state. A method could easily clobber the state set by another while
     # the latter method is running.
     ######################################### noqa
-    VERSION = "0.0.1"
+    VERSION = "0.0.2"
     GIT_URL = "https://github.com/briehl/narrative-test"
-    GIT_COMMIT_HASH = "daaf0bd2a797f60c85dfbfe3a0b4e7568037e763"
+    GIT_COMMIT_HASH = "e570c3b6658cd09be694611607be8ebf07c0e320"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -263,32 +263,6 @@ class NarrativeTest:
         # At some point might do deeper type checking...
         if not isinstance(result, dict):
             raise ValueError('Method introspect_job_info return value ' +
-                             'result is not type dict as required.')
-        # return the results
-        return [result]
-
-    def sample_dyn_service_call(self, ctx, params):
-        """
-        A simple loopback function. The single string input is just returned as output. Useful for
-        testing clients that talk to dynamic services.
-        :param params: instance of type "SampleCallParams" -> structure:
-           parameter "input" of String
-        :returns: instance of type "SampleCallResult" -> structure: parameter
-           "output" of String
-        """
-        # ctx is the context object
-        # return variables are: result
-        #BEGIN sample_dyn_service_call
-        if "input" not in params:
-            raise ValueError('Key "input" not found in parameters.')
-        result = {
-            "output": params["input"]
-        }
-        #END sample_dyn_service_call
-
-        # At some point might do deeper type checking...
-        if not isinstance(result, dict):
-            raise ValueError('Method sample_dyn_service_call return value ' +
                              'result is not type dict as required.')
         # return the results
         return [result]

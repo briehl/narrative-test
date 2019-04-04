@@ -12,6 +12,3 @@ module-version:
 
 owners:
     [wjriehl]
-
-service-config:
-    dynamic-service: true

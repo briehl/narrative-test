@@ -369,10 +369,6 @@ class Application(object):
                              name='NarrativeTest.introspect_job_info',
                              types=[dict])
         self.method_authentication['NarrativeTest.introspect_job_info'] = 'required'  # noqa
-        self.rpc_service.add(impl_NarrativeTest.sample_dyn_service_call,
-                             name='NarrativeTest.sample_dyn_service_call',
-                             types=[dict])
-        self.method_authentication['NarrativeTest.sample_dyn_service_call'] = 'none'  # noqa
         self.rpc_service.add(impl_NarrativeTest.status,
                              name='NarrativeTest.status',
                              types=[dict])

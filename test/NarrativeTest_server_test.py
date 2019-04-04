@@ -108,23 +108,3 @@ class NarrativeTestTest(unittest.TestCase):
         )[0]
         self.assertIn('report_ref', report_result)
         self.assertIn('report_name', report_result)
-
-    def test_sample_dyn_service_call(self):
-        in_str = "hello kbase"
-        result = self.getImpl().sample_dyn_service_call(
-            self.getContext(),
-            {
-                "input": in_str
-            }
-        )[0]
-        self.assertIn("output", result)
-        self.assertEqual(result["output"], in_str)
-
-        with self.assertRaises(ValueError) as err:
-            self.getImpl().sample_dyn_service_call(
-                self.getContext(),
-                {
-                    "foo": "bar"
-                }
-            )
-        self.assertEqual('Key "input" not found in parameters.', str(err.exception))

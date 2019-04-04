@@ -319,25 +319,6 @@ public class NarrativeTestClient {
         return res.get(0);
     }
 
-    /**
-     * <p>Original spec-file function name: sample_dyn_service_call</p>
-     * <pre>
-     * A simple loopback function. The single string input is just returned as output. Useful for
-     * testing clients that talk to dynamic services.
-     * </pre>
-     * @param   params   instance of type {@link us.kbase.narrativetest.SampleCallParams SampleCallParams}
-     * @return   parameter "result" of type {@link us.kbase.narrativetest.SampleCallResult SampleCallResult}
-     * @throws IOException if an IO exception occurs
-     * @throws JsonClientException if a JSON RPC exception occurs
-     */
-    public SampleCallResult sampleDynServiceCall(SampleCallParams params, RpcContext... jsonRpcContext) throws IOException, JsonClientException {
-        List<Object> args = new ArrayList<Object>();
-        args.add(params);
-        TypeReference<List<SampleCallResult>> retType = new TypeReference<List<SampleCallResult>>() {};
-        List<SampleCallResult> res = caller.jsonrpcCall("NarrativeTest.sample_dyn_service_call", args, retType, true, false, jsonRpcContext, this.serviceVersion);
-        return res.get(0);
-    }
-
     public Map<String, Object> status(RpcContext... jsonRpcContext) throws IOException, JsonClientException {
         List<Object> args = new ArrayList<Object>();
         TypeReference<List<Map<String, Object>>> retType = new TypeReference<List<Map<String, Object>>>() {};
