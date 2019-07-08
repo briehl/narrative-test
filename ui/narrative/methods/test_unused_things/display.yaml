@@ -1,0 +1,42 @@
+#
+# define display information
+#
+name: Test Unused things
+tooltip: |
+    A test spec that tests unused inputs/method names.
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    simple_string :
+        ui-name : |
+            A String
+        short-hint : |
+            A description string.
+    another_string :
+        ui-name : |
+            Another String
+        short-hint : |
+            Another description string.
+
+description : |
+    <p>This is a tiny, simple method intended for testing the Narrative's ability to parse and display specs.</p>
