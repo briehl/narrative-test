@@ -1,0 +1,24 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "wjriehl"
+    ],
+    "contact": "wjriehl@lbl.gov",
+    "visible": true,
+    "categories": ["active"],
+    "widgets": {
+        "input": null,
+        "output": null
+    },
+    "parameters": [],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "NarrativeTest",
+            "method": "app_fail",
+            "input_mapping": [],
+            "output_mapping": []
+        }
+    },
+    "job_id_output_field": "docker"
+}

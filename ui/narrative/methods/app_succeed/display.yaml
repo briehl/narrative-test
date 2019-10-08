@@ -1,0 +1,35 @@
+#
+# define display information
+#
+name: App Succeed
+tooltip: |
+    A simple test app that always succeeds.
+screenshots: []
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    param :
+        ui-name : |
+            A String
+        short-hint : |
+            A string.
+
+description : |
+    <p>This is a tiny, simple method intended for making sure the execution engine can succeed.</p>

@@ -1,0 +1,63 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "wjriehl"
+    ],
+    "contact": "wjriehl@lbl.gov",
+    "visible": true,
+    "categories": ["active"],
+    "widgets": {
+        "input": null,
+        "output": null
+    },
+    "parameters": [
+        {
+            "id": "naptime",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "5" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types" : [ ],
+                "validate_as": "int",
+                "min_int" : 0
+            }
+        },
+        {
+            "id": "fail",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "field_type": "checkbox",
+            "checkbox_options": {
+                "checked_value": 1,
+                "unchecked_value": 0
+            }
+        }
+    ],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "NarrativeTest",
+            "method": "app_sleep",
+            "input_mapping": [
+                {
+                    "input_parameter": "naptime",
+                    "target_property": "naptime"
+                },
+                {
+                    "input_parameter": "fail",
+                    "target_property": "fail"
+                }
+            ],
+            "output_mapping": [
+                {
+                    "service_method_output_path": [0],
+                    "target_property": "naptime"
+                }
+            ]
+        }
+    },
+    "job_id_output_field": "docker"
+}

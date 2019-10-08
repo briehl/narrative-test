@@ -1,0 +1,40 @@
+#
+# define display information
+#
+name: App Sleep
+tooltip: |
+    A simple test app that sleeps before succeeding or failing.
+screenshots: []
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    naptime :
+        ui-name : |
+            Nap length (sec)
+        short-hint : |
+            How long to sleep in seconds before returning
+    fail:
+        ui-name : |
+            Fail on wake
+        short-hint : |
+            If checked, this will raise on error after sleeping.
+
+description : |
+    <p>This is a tiny, simple method intended for making sure the execution engine can sleep for a while (to test cancellation).</p>

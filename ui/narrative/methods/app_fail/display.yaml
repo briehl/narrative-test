@@ -1,0 +1,29 @@
+#
+# define display information
+#
+name: App Fail
+tooltip: |
+    A simple test app that always fails.
+screenshots: []
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+parameters:
+  param:
+
+
+description : |
+    <p>This is a tiny, simple method intended for making sure the execution engine can fail on command.</p>
