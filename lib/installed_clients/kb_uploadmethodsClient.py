@@ -12,10 +12,9 @@ from __future__ import print_function
 try:
     # baseclient and this client are in a package
     from .baseclient import BaseClient as _BaseClient  # @UnusedImport
-except:
+except ImportError:
     # no they aren't
     from baseclient import BaseClient as _BaseClient  # @Reimport
-import time
 
 
 class kb_uploadmethods(object):
@@ -24,7 +23,7 @@ class kb_uploadmethods(object):
             self, url=None, timeout=30 * 60, user_id=None,
             password=None, token=None, ignore_authrc=False,
             trust_all_ssl_certificates=False,
-            auth_svc='https://kbase.us/services/authorization/Sessions/Login',
+            auth_svc='https://ci.kbase.us/services/auth/api/legacy/KBase/Sessions/Login',
             service_ver='release',
             async_job_check_time_ms=100, async_job_check_time_scale_percent=150, 
             async_job_check_max_time_ms=300000):
@@ -39,14 +38,6 @@ class kb_uploadmethods(object):
             async_job_check_time_ms=async_job_check_time_ms,
             async_job_check_time_scale_percent=async_job_check_time_scale_percent,
             async_job_check_max_time_ms=async_job_check_max_time_ms)
-
-    def _check_job(self, job_id):
-        return self._client._check_job('kb_uploadmethods', job_id)
-
-    def _upload_fastq_file_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.upload_fastq_file', [params],
-             self._service_ver, context)
 
     def upload_fastq_file(self, params, context=None):
         """
@@ -93,22 +84,8 @@ class kb_uploadmethods(object):
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._upload_fastq_file_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _upload_fasta_gff_file_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.upload_fasta_gff_file', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.upload_fastq_file',
+                                    [params], self._service_ver, context)
 
     def upload_fasta_gff_file(self, params, context=None):
         """
@@ -119,40 +96,88 @@ class kb_uploadmethods(object):
            file containing predicted gene models and corresponding features
            Optional params: scientific_name: proper name for species, key for
            taxonomy lookup. Default to 'unknown_taxon' source: Source Of The
-           GenBank File. Default to 'User' taxon_wsname - where the reference
-           taxons are. Default to 'ReferenceTaxons' taxon_reference - if
-           defined, will try to link the Genome to the specified taxonomy
-           object release: Release Or Version Of The Source Data
-           genetic_code: Genetic Code For The Organism type: 'Reference',
-           'User upload', 'Representative') -> structure: parameter
-           "fasta_file" of String, parameter "gff_file" of String, parameter
-           "genome_name" of String, parameter "workspace_name" of type
-           "workspace_name" (workspace name of the object), parameter
-           "scientific_name" of String, parameter "source" of String,
-           parameter "taxon_wsname" of String, parameter "taxon_reference" of
-           String, parameter "release" of String, parameter "genetic_code" of
-           Long, parameter "type" of String
+           GFF File. Default to 'User' taxon_wsname - where the reference
+           taxons are. Default to 'ReferenceTaxons' taxon_id - if defined,
+           will try to link the Genome to the specified taxonomy id in lieu
+           of performing the lookup during upload release: Release Or Version
+           Of The Source Data genetic_code: Genetic Code For The Organism
+           type: 'Reference', 'User upload', 'Representative') -> structure:
+           parameter "fasta_file" of String, parameter "gff_file" of String,
+           parameter "genome_name" of String, parameter "workspace_name" of
+           type "workspace_name" (workspace name of the object), parameter
+           "genome_type" of String, parameter "scientific_name" of String,
+           parameter "source" of String, parameter "taxon_wsname" of String,
+           parameter "taxon_id" of String, parameter "release" of String,
+           parameter "genetic_code" of Long, parameter "type" of String,
+           parameter "generate_missing_genes" of String
         :returns: instance of type "UploadFastaGFFMethodResult" -> structure:
            parameter "genome_ref" of String, parameter "genome_info" of
            String, parameter "report_name" of type "report_name", parameter
            "report_ref" of type "report_ref"
         """
-        job_id = self._upload_fasta_gff_file_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
+        return self._client.run_job('kb_uploadmethods.upload_fasta_gff_file',
+                                    [params], self._service_ver, context)
 
-    def _unpack_staging_file_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.unpack_staging_file', [params],
-             self._service_ver, context)
+    def upload_metagenome_fasta_gff_file(self, params, context=None):
+        """
+        :param params: instance of type
+           "UploadMetagenomeFastaGFFMethodParams" (Required: genome_name:
+           output metagenome object name workspace_name: workspace name/ID of
+           the object For staging area: fasta_file: fasta file containing
+           assembled contigs/chromosomes gff_file: gff file containing
+           predicted gene models and corresponding features Optional params:
+           source: Source Of The GFF File. Default to 'User' taxon_wsname -
+           where the reference taxons are. Default to 'ReferenceTaxons'
+           taxon_id - if defined, will try to link the Genome to the
+           specified taxonomy id in lieu of performing the lookup during
+           upload release: Release Or Version Of The Source Data
+           genetic_code: Genetic Code For The Organism type: 'Reference',
+           'User upload', 'Representative') -> structure: parameter
+           "fasta_file" of String, parameter "gff_file" of String, parameter
+           "genome_name" of String, parameter "workspace_name" of type
+           "workspace_name" (workspace name of the object), parameter
+           "source" of String, parameter "taxon_wsname" of String, parameter
+           "taxon_id" of String, parameter "release" of String, parameter
+           "genetic_code" of Long, parameter "type" of String, parameter
+           "generate_missing_genes" of String
+        :returns: instance of type "UploadMetagenomeFastaGFFMethodResult" ->
+           structure: parameter "genome_ref" of String, parameter
+           "genome_info" of String, parameter "report_name" of type
+           "report_name", parameter "report_ref" of type "report_ref"
+        """
+        return self._client.run_job('kb_uploadmethods.upload_metagenome_fasta_gff_file',
+                                    [params], self._service_ver, context)
+
+    def batch_import_genomes_from_staging(self, params, context=None):
+        """
+        :param params: instance of type "BatchGenomeImporterParams" ->
+           structure: parameter "staging_subdir" of String, parameter
+           "genome_set_name" of String, parameter "workspace_name" of type
+           "workspace_name" (workspace name of the object), parameter
+           "genome_type" of String, parameter "source" of String, parameter
+           "taxon_wsname" of String, parameter "taxon_id" of String,
+           parameter "release" of String, parameter "genetic_code" of Long,
+           parameter "generate_missing_genes" of String
+        :returns: instance of type "BatchImporterResult" -> structure:
+           parameter "set_ref" of String, parameter "report_name" of type
+           "report_name", parameter "report_ref" of type "report_ref"
+        """
+        return self._client.run_job('kb_uploadmethods.batch_import_genomes_from_staging',
+                                    [params], self._service_ver, context)
+
+    def batch_import_assemblies_from_staging(self, params, context=None):
+        """
+        :param params: instance of type "BatchAssemblyImporterParams" ->
+           structure: parameter "staging_subdir" of String, parameter
+           "assembly_set_name" of String, parameter "workspace_name" of type
+           "workspace_name" (workspace name of the object), parameter
+           "min_contig_length" of Long, parameter "type" of String
+        :returns: instance of type "BatchImporterResult" -> structure:
+           parameter "set_ref" of String, parameter "report_name" of type
+           "report_name", parameter "report_ref" of type "report_ref"
+        """
+        return self._client.run_job('kb_uploadmethods.batch_import_assemblies_from_staging',
+                                    [params], self._service_ver, context)
 
     def unpack_staging_file(self, params, context=None):
         """
@@ -172,22 +197,8 @@ class kb_uploadmethods(object):
            file path(s) in staging area) -> structure: parameter
            "unpacked_file_path" of String
         """
-        job_id = self._unpack_staging_file_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _unpack_web_file_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.unpack_web_file', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.unpack_staging_file',
+                                    [params], self._service_ver, context)
 
     def unpack_web_file(self, params, context=None):
         """
@@ -209,22 +220,8 @@ class kb_uploadmethods(object):
            path(s) in staging area) -> structure: parameter
            "unpacked_file_path" of String
         """
-        job_id = self._unpack_web_file_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_genbank_from_staging_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_genbank_from_staging', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.unpack_web_file',
+                                    [params], self._service_ver, context)
 
     def import_genbank_from_staging(self, params, context=None):
         """
@@ -241,35 +238,27 @@ class kb_uploadmethods(object):
            file typically something like RefSeq or Ensembl optional params:
            release - Release or version number of the data per example
            Ensembl has numbered releases of all their data: Release 31
-           generate_ids_if_needed - If field used for feature id is not
-           there, generate ids (default behavior is raising an exception)
-           genetic_code - Genetic code of organism. Overwrites determined GC
-           from taxon object type - Reference, Representative or User upload)
-           -> structure: parameter "staging_file_subdir_path" of String,
-           parameter "genome_name" of String, parameter "workspace_name" of
-           String, parameter "source" of String, parameter "release" of
-           String, parameter "genetic_code" of Long, parameter "type" of
-           String, parameter "generate_ids_if_needed" of String, parameter
-           "exclude_ontologies" of String
+           scientific_name - will be used to set the scientific name of the
+           genome and link to a taxon taxon_id - if defined, will try to link
+           the Genome to the specified taxonomy id in lieu of performing the
+           lookup during upload generate_ids_if_needed - If field used for
+           feature id is not there, generate ids (default behavior is raising
+           an exception) generate_missing_genes - Generate gene feature for
+           CDSs that do not have a parent in file genetic_code - Genetic code
+           of organism. Overwrites determined GC from taxon object type -
+           Reference, Representative or User upload) -> structure: parameter
+           "staging_file_subdir_path" of String, parameter "genome_name" of
+           String, parameter "workspace_name" of String, parameter "source"
+           of String, parameter "genome_type" of String, parameter "release"
+           of String, parameter "genetic_code" of Long, parameter "type" of
+           String, parameter "scientific_name" of String, parameter
+           "taxon_id" of String, parameter "generate_ids_if_needed" of
+           String, parameter "generate_missing_genes" of String
         :returns: instance of type "GenomeSaveResult" -> structure: parameter
            "genome_ref" of String
         """
-        job_id = self._import_genbank_from_staging_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_sra_from_staging_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_sra_from_staging', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.import_genbank_from_staging',
+                                    [params], self._service_ver, context)
 
     def import_sra_from_staging(self, params, context=None):
         """
@@ -297,22 +286,8 @@ class kb_uploadmethods(object):
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._import_sra_from_staging_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_sra_from_web_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_sra_from_web', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.import_sra_from_staging',
+                                    [params], self._service_ver, context)
 
     def import_sra_from_web(self, params, context=None):
         """
@@ -339,22 +314,8 @@ class kb_uploadmethods(object):
            parameter "obj_refs" of list of String, parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._import_sra_from_web_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_fasta_as_assembly_from_staging_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_fasta_as_assembly_from_staging', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.import_sra_from_web',
+                                    [params], self._service_ver, context)
 
     def import_fasta_as_assembly_from_staging(self, params, context=None):
         """
@@ -369,27 +330,13 @@ class kb_uploadmethods(object):
            "staging_file_subdir_path" of String, parameter "assembly_name" of
            String, parameter "workspace_name" of type "workspace_name"
            (workspace name of the object), parameter "min_contig_length" of
-           Long
+           Long, parameter "type" of String
         :returns: instance of type "UploadMethodResult" -> structure:
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._import_fasta_as_assembly_from_staging_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_tsv_as_media_from_staging_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_tsv_as_media_from_staging', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.import_fasta_as_assembly_from_staging',
+                                    [params], self._service_ver, context)
 
     def import_tsv_as_media_from_staging(self, params, context=None):
         """
@@ -408,22 +355,8 @@ class kb_uploadmethods(object):
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._import_tsv_as_media_from_staging_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_excel_as_media_from_staging_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_excel_as_media_from_staging', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.import_tsv_as_media_from_staging',
+                                    [params], self._service_ver, context)
 
     def import_excel_as_media_from_staging(self, params, context=None):
         """
@@ -442,22 +375,8 @@ class kb_uploadmethods(object):
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._import_excel_as_media_from_staging_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_tsv_or_excel_as_media_from_staging_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_tsv_or_excel_as_media_from_staging', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.import_excel_as_media_from_staging',
+                                    [params], self._service_ver, context)
 
     def import_tsv_or_excel_as_media_from_staging(self, params, context=None):
         """
@@ -476,22 +395,8 @@ class kb_uploadmethods(object):
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._import_tsv_or_excel_as_media_from_staging_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_file_as_fba_model_from_staging_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_file_as_fba_model_from_staging', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.import_tsv_or_excel_as_media_from_staging',
+                                    [params], self._service_ver, context)
 
     def import_file_as_fba_model_from_staging(self, params, context=None):
         """
@@ -515,22 +420,8 @@ class kb_uploadmethods(object):
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._import_file_as_fba_model_from_staging_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_tsv_as_expression_matrix_from_staging_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_tsv_as_expression_matrix_from_staging', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.import_file_as_fba_model_from_staging',
+                                    [params], self._service_ver, context)
 
     def import_tsv_as_expression_matrix_from_staging(self, params, context=None):
         """
@@ -559,22 +450,8 @@ class kb_uploadmethods(object):
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._import_tsv_as_expression_matrix_from_staging_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_reads_from_staging_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_reads_from_staging', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.import_tsv_as_expression_matrix_from_staging',
+                                    [params], self._service_ver, context)
 
     def import_reads_from_staging(self, params, context=None):
         """
@@ -610,22 +487,8 @@ class kb_uploadmethods(object):
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._import_reads_from_staging_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
-
-    def _import_tsv_as_phenotype_set_from_staging_submit(self, params, context=None):
-        return self._client._submit_job(
-             'kb_uploadmethods.import_tsv_as_phenotype_set_from_staging', [params],
-             self._service_ver, context)
+        return self._client.run_job('kb_uploadmethods.import_reads_from_staging',
+                                    [params], self._service_ver, context)
 
     def import_tsv_as_phenotype_set_from_staging(self, params, context=None):
         """
@@ -646,28 +509,29 @@ class kb_uploadmethods(object):
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        job_id = self._import_tsv_as_phenotype_set_from_staging_submit(params, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
+        return self._client.run_job('kb_uploadmethods.import_tsv_as_phenotype_set_from_staging',
+                                    [params], self._service_ver, context)
+
+    def import_attribute_mapping_from_staging(self, params, context=None):
+        """
+        :param params: instance of type "FileToConditionSetParams" (required
+           params: staging_file_subdir_path: subdirectory file path e.g. for
+           file: /data/bulk/user_name/file_name staging_file_subdir_path is
+           file_name for file:
+           /data/bulk/user_name/subdir_1/subdir_2/file_name
+           staging_file_subdir_path is subdir_1/subdir_2/file_name
+           attribute_mapping_name: output ConditionSet object name
+           workspace_id: workspace name/ID of the object) -> structure:
+           parameter "staging_file_subdir_path" of String, parameter
+           "workspace_name" of type "workspace_name" (workspace name of the
+           object), parameter "attribute_mapping_name" of String
+        :returns: instance of type "UploadMethodResult" -> structure:
+           parameter "obj_ref" of type "obj_ref", parameter "report_name" of
+           type "report_name", parameter "report_ref" of type "report_ref"
+        """
+        return self._client.run_job('kb_uploadmethods.import_attribute_mapping_from_staging',
+                                    [params], self._service_ver, context)
 
     def status(self, context=None):
-        job_id = self._client._submit_job('kb_uploadmethods.status', 
-            [], self._service_ver, context)
-        async_job_check_time = self._client.async_job_check_time
-        while True:
-            time.sleep(async_job_check_time)
-            async_job_check_time = (async_job_check_time *
-                self._client.async_job_check_time_scale_percent / 100.0)
-            if async_job_check_time > self._client.async_job_check_max_time:
-                async_job_check_time = self._client.async_job_check_max_time
-            job_state = self._check_job(job_id)
-            if job_state['finished']:
-                return job_state['result'][0]
+        return self._client.run_job('kb_uploadmethods.status',
+                                    [], self._service_ver, context)

@@ -12,7 +12,7 @@ from __future__ import print_function
 try:
     # baseclient and this client are in a package
     from .baseclient import BaseClient as _BaseClient  # @UnusedImport
-except:
+except ImportError:
     # no they aren't
     from baseclient import BaseClient as _BaseClient  # @Reimport
 
@@ -23,7 +23,7 @@ class NarrativeTest(object):
             self, url=None, timeout=30 * 60, user_id=None,
             password=None, token=None, ignore_authrc=False,
             trust_all_ssl_certificates=False,
-            auth_svc='https://kbase.us/services/authorization/Sessions/Login'):
+            auth_svc='https://ci.kbase.us/services/auth/api/legacy/KBase/Sessions/Login'):
         if url is None:
             raise ValueError('A url is required')
         self._service_ver = None
@@ -47,9 +47,8 @@ class NarrativeTest(object):
            "report_ref" of String, parameter "new_genome_ref" of type
            "ws_contigset_id"
         """
-        return self._client.call_method(
-            'NarrativeTest.test_async_job',
-            [params], self._service_ver, context)
+        return self._client.call_method('NarrativeTest.test_async_job',
+                                        [params], self._service_ver, context)
 
     def test_editor(self, editor, workspace, context=None):
         """
@@ -60,18 +59,16 @@ class NarrativeTest(object):
            parameter "report_name" of String, parameter "report_ref" of
            String, parameter "output" of String
         """
-        return self._client.call_method(
-            'NarrativeTest.test_editor',
-            [editor, workspace], self._service_ver, context)
+        return self._client.call_method('NarrativeTest.test_editor',
+                                        [editor, workspace], self._service_ver, context)
 
     def save_reads_set_v1(self, inputs, context=None):
         """
         :param inputs: instance of unspecified object
         :returns: instance of unspecified object
         """
-        return self._client.call_method(
-            'NarrativeTest.save_reads_set_v1',
-            [inputs], self._service_ver, context)
+        return self._client.call_method('NarrativeTest.save_reads_set_v1',
+                                        [inputs], self._service_ver, context)
 
     def test_param_groups(self, params, context=None):
         """
@@ -84,9 +81,8 @@ class NarrativeTest(object):
         :returns: instance of type "ReportOutput" -> structure: parameter
            "report_name" of String, parameter "report_ref" of String
         """
-        return self._client.call_method(
-            'NarrativeTest.test_param_groups',
-            [params], self._service_ver, context)
+        return self._client.call_method('NarrativeTest.test_param_groups',
+                                        [params], self._service_ver, context)
 
     def test_input_mapping(self, params, context=None):
         """
@@ -95,18 +91,16 @@ class NarrativeTest(object):
            representing a workspace id.), parameter "file_path" of String
         :returns: instance of unspecified object
         """
-        return self._client.call_method(
-            'NarrativeTest.test_input_mapping',
-            [params], self._service_ver, context)
+        return self._client.call_method('NarrativeTest.test_input_mapping',
+                                        [params], self._service_ver, context)
 
     def generic_test(self, params, context=None):
         """
         :param params: instance of unspecified object
         :returns: instance of unspecified object
         """
-        return self._client.call_method(
-            'NarrativeTest.generic_test',
-            [params], self._service_ver, context)
+        return self._client.call_method('NarrativeTest.generic_test',
+                                        [params], self._service_ver, context)
 
     def import_reads_from_staging(self, params, context=None):
         """
@@ -142,9 +136,8 @@ class NarrativeTest(object):
            parameter "obj_ref" of type "obj_ref", parameter "report_name" of
            type "report_name", parameter "report_ref" of type "report_ref"
         """
-        return self._client.call_method(
-            'NarrativeTest.import_reads_from_staging',
-            [params], self._service_ver, context)
+        return self._client.call_method('NarrativeTest.import_reads_from_staging',
+                                        [params], self._service_ver, context)
 
     def example_report(self, params, context=None):
         """
@@ -155,9 +148,8 @@ class NarrativeTest(object):
            parameter "report_name" of type "report_name", parameter
            "report_ref" of type "report_ref"
         """
-        return self._client.call_method(
-            'NarrativeTest.example_report',
-            [params], self._service_ver, context)
+        return self._client.call_method('NarrativeTest.example_report',
+                                        [params], self._service_ver, context)
 
     def introspect_job_info(self, params, context=None):
         """
@@ -169,9 +161,17 @@ class NarrativeTest(object):
            structure: parameter "param1" of String, parameter "param2" of
            String
         """
-        return self._client.call_method(
-            'NarrativeTest.introspect_job_info',
-            [params], self._service_ver, context)
+        return self._client.call_method('NarrativeTest.introspect_job_info',
+                                        [params], self._service_ver, context)
+
+    def ver(self, foo-3bar, context=None):
+        """
+        :param foo-3bar: instance of type "foo-3bar"
+        :returns: instance of type "IntrospectParams" -> structure: parameter
+           "param1" of String, parameter "param2" of String
+        """
+        return self._client.call_method('NarrativeTest.ver',
+                                        [foo-3bar], self._service_ver, context)
 
     def status(self, context=None):
         return self._client.call_method('NarrativeTest.status',

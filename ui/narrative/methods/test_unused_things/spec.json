@@ -37,7 +37,8 @@
         "service-mapping": {
             "url": "",
             "name": "NarrativeTest",
-            "method": "generic_tests",
+            "method": "generic_test",
+            "estimate_resources": "some_method",
             "input_mapping": [
                 {
                     "input_parameter": "simple_string",

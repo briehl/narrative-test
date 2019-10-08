@@ -995,6 +995,96 @@ IntrospectResult is a reference to a hash where the following keys are defined:
     }
 }
  
+
+
+=head2 ver
+
+  $return = $obj->ver($foo-3bar)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$foo-3bar is a NarrativeTest.foo-3bar
+$return is a NarrativeTest.IntrospectParams
+foo-3bar is a string
+IntrospectParams is a reference to a hash where the following keys are defined:
+	param1 has a value which is a string
+	param2 has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+$foo-3bar is a NarrativeTest.foo-3bar
+$return is a NarrativeTest.IntrospectParams
+foo-3bar is a string
+IntrospectParams is a reference to a hash where the following keys are defined:
+	param1 has a value which is a string
+	param2 has a value which is a string
+
+
+=end text
+
+=item Description
+
+
+
+=back
+
+=cut
+
+ sub ver
+{
+    my($self, @args) = @_;
+
+# Authentication: none
+
+    if ((my $n = @args) != 1)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function ver (received $n, expecting 1)");
+    }
+    {
+	my($foo-3bar) = @args;
+
+	my @_bad_arguments;
+        (!ref($foo-3bar)) or push(@_bad_arguments, "Invalid type for argument 1 \"foo-3bar\" (value was \"$foo-3bar\")");
+        if (@_bad_arguments) {
+	    my $msg = "Invalid arguments passed to ver:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	    Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+								   method_name => 'ver');
+	}
+    }
+
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "NarrativeTest.ver",
+	    params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'ver',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return wantarray ? @{$result->result} : $result->result->[0];
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method ver",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'ver',
+				       );
+    }
+}
+ 
   
 sub status
 {
@@ -1038,16 +1128,16 @@ sub version {
             Bio::KBase::Exceptions::JSONRPC->throw(
                 error => $result->error_message,
                 code => $result->content->{code},
-                method_name => 'introspect_job_info',
+                method_name => 'ver',
             );
         } else {
             return wantarray ? @{$result->result} : $result->result->[0];
         }
     } else {
         Bio::KBase::Exceptions::HTTP->throw(
-            error => "Error invoking method introspect_job_info",
+            error => "Error invoking method ver",
             status_line => $self->{client}->status_line,
-            method_name => 'introspect_job_info',
+            method_name => 'ver',
         );
     }
 }
@@ -1256,6 +1346,58 @@ workspace has a value which is a NarrativeTest.workspace_name
 input_genome_name has a value which is a NarrativeTest.genome_name
 output_genome_name has a value which is a NarrativeTest.genome_name
 
+
+=end text
+
+=back
+
+
+
+=head2 somemap
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the key is a string and the value is a string
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the key is a string and the value is a string
+
+=end text
+
+=back
+
+
+
+=head2 othermap
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the key is a string and the value is a string
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the key is a string and the value is a string
 
 =end text
 
@@ -1936,6 +2078,32 @@ context has a value which is an UnspecifiedObject, which can hold any non-null o
 config has a value which is an UnspecifiedObject, which can hold any non-null object
 params has a value which is a NarrativeTest.IntrospectParams
 
+
+=end text
+
+=back
+
+
+
+=head2 foo-3bar
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a string
+</pre>
+
+=end html
+
+=begin text
+
+a string
 
 =end text
 

@@ -27,6 +27,10 @@ module NarrativeTest {
         genome_name output_genome_name;
     } TestAsyncJobParams;
 
+    typedef mapping<string, string> somemap;
+
+    typedef mapping<string, string> othermap;
+
     /*
         The workspace ID for a ContigSet data object.
         @id ws KBaseGenomes.ContigSet
@@ -163,6 +167,9 @@ module NarrativeTest {
         IntrospectParams params;
     } IntrospectResult;
 
+    typedef string foo-3bar;
+
     funcdef introspect_job_info(IntrospectParams params) returns (IntrospectResult result) authentication required;
 
+    funcdef ver(foo-3bar) returns (IntrospectParams) authentication none;
 };

@@ -24,7 +24,7 @@ class NarrativeTest:
     ######################################### noqa
     VERSION = "0.0.2"
     GIT_URL = "https://github.com/briehl/narrative-test"
-    GIT_COMMIT_HASH = "e570c3b6658cd09be694611607be8ebf07c0e320"
+    GIT_COMMIT_HASH = "48e09206586fe506b7fcff439e9f66acab8f3b52"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -266,6 +266,24 @@ class NarrativeTest:
                              'result is not type dict as required.')
         # return the results
         return [result]
+
+    def ver(self, ctx, foo-3bar):
+        """
+        :param foo-3bar: instance of type "foo-3bar"
+        :returns: instance of type "IntrospectParams" -> structure: parameter
+           "param1" of String, parameter "param2" of String
+        """
+        # ctx is the context object
+        # return variables are: returnVal
+        #BEGIN ver
+        #END ver
+
+        # At some point might do deeper type checking...
+        if not isinstance(returnVal, dict):
+            raise ValueError('Method ver return value ' +
+                             'returnVal is not type dict as required.')
+        # return the results
+        return [returnVal]
     def status(self, ctx):
         #BEGIN_STATUS
         returnVal = {'state': "OK",
