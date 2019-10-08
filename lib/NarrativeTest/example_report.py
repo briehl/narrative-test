@@ -1,5 +1,5 @@
-from KBaseReport.KBaseReportClient import KBaseReport
-from DataFileUtil.DataFileUtilClient import DataFileUtil
+from installed_clients.KBaseReportClient import KBaseReport
+from installed_clients.DataFileUtilClient import DataFileUtil
 import uuid
 import os
 import errno

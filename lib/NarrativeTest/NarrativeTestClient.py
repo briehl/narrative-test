@@ -164,15 +164,6 @@ class NarrativeTest(object):
         return self._client.call_method('NarrativeTest.introspect_job_info',
                                         [params], self._service_ver, context)
 
-    def ver(self, foo-3bar, context=None):
-        """
-        :param foo-3bar: instance of type "foo-3bar"
-        :returns: instance of type "IntrospectParams" -> structure: parameter
-           "param1" of String, parameter "param2" of String
-        """
-        return self._client.call_method('NarrativeTest.ver',
-                                        [foo-3bar], self._service_ver, context)
-
     def status(self, context=None):
         return self._client.call_method('NarrativeTest.status',
                                         [], self._service_ver, context)

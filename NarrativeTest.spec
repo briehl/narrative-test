@@ -167,9 +167,5 @@ module NarrativeTest {
         IntrospectParams params;
     } IntrospectResult;
 
-    typedef string foo-3bar;
-
     funcdef introspect_job_info(IntrospectParams params) returns (IntrospectResult result) authentication required;
-
-    funcdef ver(foo-3bar) returns (IntrospectParams) authentication none;
 };
