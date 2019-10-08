@@ -374,6 +374,18 @@ class Application(object):
                              name='NarrativeTest.introspect_job_info',
                              types=[dict])
         self.method_authentication['NarrativeTest.introspect_job_info'] = 'required'  # noqa
+        self.rpc_service.add(impl_NarrativeTest.app_succeed,
+                             name='NarrativeTest.app_succeed',
+                             types=[str])
+        self.method_authentication['NarrativeTest.app_succeed'] = 'required'  # noqa
+        self.rpc_service.add(impl_NarrativeTest.app_fail,
+                             name='NarrativeTest.app_fail',
+                             types=[])
+        self.method_authentication['NarrativeTest.app_fail'] = 'required'  # noqa
+        self.rpc_service.add(impl_NarrativeTest.app_sleep,
+                             name='NarrativeTest.app_sleep',
+                             types=[dict])
+        self.method_authentication['NarrativeTest.app_sleep'] = 'required'  # noqa
         self.rpc_service.add(impl_NarrativeTest.status,
                              name='NarrativeTest.status',
                              types=[dict])

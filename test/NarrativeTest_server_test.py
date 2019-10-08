@@ -108,3 +108,23 @@ class NarrativeTestTest(unittest.TestCase):
         )[0]
         self.assertIn('report_ref', report_result)
         self.assertIn('report_name', report_result)
+
+    def test_app_succeed(self):
+        param = "some_param"
+        param_ret = self.getImpl().app_succeed(self.getContext(), param)[0]
+        self.assertEqual(param, param_ret)
+
+    def test_app_fail(self):
+        with self.assertRaises(RuntimeError) as e:
+            self.getImpl().app_fail(self.getContext())
+        self.assertIn("Raising an error because that's what we do here.", str(e.exception))
+
+    def test_app_sleep(self):
+        naptime = 3
+        naptime_ret = self.getImpl().app_sleep(self.getContext(), {"naptime": naptime, "fail": 0})[0]
+        self.assertEqual(naptime, naptime_ret)
+
+        with self.assertRaises(RuntimeError) as e:
+            self.getImpl().app_sleep(self.getContext(), {"naptime": 1, "fail": 1})
+        self.assertIn("App woke up from its nap very cranky!", str(e.exception))
+

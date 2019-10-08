@@ -995,6 +995,244 @@ IntrospectResult is a reference to a hash where the following keys are defined:
     }
 }
  
+
+
+=head2 app_succeed
+
+  $param = $obj->app_succeed($param)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$param is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+$param is a string
+
+
+=end text
+
+=item Description
+
+A simple function that should always succeed immediately (just returns the string passed to it)
+
+=back
+
+=cut
+
+ sub app_succeed
+{
+    my($self, @args) = @_;
+
+# Authentication: required
+
+    if ((my $n = @args) != 1)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function app_succeed (received $n, expecting 1)");
+    }
+    {
+	my($param) = @args;
+
+	my @_bad_arguments;
+        (!ref($param)) or push(@_bad_arguments, "Invalid type for argument 1 \"param\" (value was \"$param\")");
+        if (@_bad_arguments) {
+	    my $msg = "Invalid arguments passed to app_succeed:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	    Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+								   method_name => 'app_succeed');
+	}
+    }
+
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "NarrativeTest.app_succeed",
+	    params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'app_succeed',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return wantarray ? @{$result->result} : $result->result->[0];
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method app_succeed",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'app_succeed',
+				       );
+    }
+}
+ 
+
+
+=head2 app_fail
+
+  $obj->app_fail()
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+
+</pre>
+
+=end html
+
+=begin text
+
+
+
+=end text
+
+=item Description
+
+A simple function that always fails, throwing an error.
+
+=back
+
+=cut
+
+ sub app_fail
+{
+    my($self, @args) = @_;
+
+# Authentication: required
+
+    if ((my $n = @args) != 0)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function app_fail (received $n, expecting 0)");
+    }
+
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "NarrativeTest.app_fail",
+	    params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'app_fail',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return;
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method app_fail",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'app_fail',
+				       );
+    }
+}
+ 
+
+
+=head2 app_sleep
+
+  $naptime = $obj->app_sleep($param)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$param is a NarrativeTest.SleepParams
+$naptime is an int
+SleepParams is a reference to a hash where the following keys are defined:
+	naptime has a value which is an int
+	fail has a value which is a NarrativeTest.boolean
+boolean is an int
+
+</pre>
+
+=end html
+
+=begin text
+
+$param is a NarrativeTest.SleepParams
+$naptime is an int
+SleepParams is a reference to a hash where the following keys are defined:
+	naptime has a value which is an int
+	fail has a value which is a NarrativeTest.boolean
+boolean is an int
+
+
+=end text
+
+=item Description
+
+A slightly more complex function that runs for a given time (in seconds) before exiting. (negative values are treated as zero)
+Can also end in failure. If successful, returns how long it slept.
+
+=back
+
+=cut
+
+ sub app_sleep
+{
+    my($self, @args) = @_;
+
+# Authentication: required
+
+    if ((my $n = @args) != 1)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function app_sleep (received $n, expecting 1)");
+    }
+    {
+	my($param) = @args;
+
+	my @_bad_arguments;
+        (ref($param) eq 'HASH') or push(@_bad_arguments, "Invalid type for argument 1 \"param\" (value was \"$param\")");
+        if (@_bad_arguments) {
+	    my $msg = "Invalid arguments passed to app_sleep:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	    Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+								   method_name => 'app_sleep');
+	}
+    }
+
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "NarrativeTest.app_sleep",
+	    params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'app_sleep',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return wantarray ? @{$result->result} : $result->result->[0];
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method app_sleep",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'app_sleep',
+				       );
+    }
+}
+ 
   
 sub status
 {
@@ -1038,16 +1276,16 @@ sub version {
             Bio::KBase::Exceptions::JSONRPC->throw(
                 error => $result->error_message,
                 code => $result->content->{code},
-                method_name => 'introspect_job_info',
+                method_name => 'app_sleep',
             );
         } else {
             return wantarray ? @{$result->result} : $result->result->[0];
         }
     } else {
         Bio::KBase::Exceptions::HTTP->throw(
-            error => "Error invoking method introspect_job_info",
+            error => "Error invoking method app_sleep",
             status_line => $self->{client}->status_line,
-            method_name => 'introspect_job_info',
+            method_name => 'app_sleep',
         );
     }
 }
@@ -1081,6 +1319,37 @@ sub _validate_version {
 }
 
 =head1 TYPES
+
+
+
+=head2 boolean
+
+=over 4
+
+
+
+=item Description
+
+if 0, treat as false, any other value treat as true
+
+
+=item Definition
+
+=begin html
+
+<pre>
+an int
+</pre>
+
+=end html
+
+=begin text
+
+an int
+
+=end text
+
+=back
 
 
 
@@ -1987,6 +2256,44 @@ a reference to a hash where the following keys are defined:
 context has a value which is an UnspecifiedObject, which can hold any non-null object
 config has a value which is an UnspecifiedObject, which can hold any non-null object
 params has a value which is a NarrativeTest.IntrospectParams
+
+
+=end text
+
+=back
+
+
+
+=head2 SleepParams
+
+=over 4
+
+
+
+=item Description
+
+naptime - int - sleep time in seconds
+fail - boolean - if true, this always throws an error
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+naptime has a value which is an int
+fail has a value which is a NarrativeTest.boolean
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+naptime has a value which is an int
+fail has a value which is a NarrativeTest.boolean
 
 
 =end text

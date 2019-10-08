@@ -4,6 +4,7 @@ from installed_clients.kb_uploadmethodsClient import kb_uploadmethods
 from NarrativeTest.example_report import ExampleReport
 from copy import deepcopy
 import os
+import time
 #END_HEADER
 
 
@@ -24,7 +25,7 @@ class NarrativeTest:
     ######################################### noqa
     VERSION = "0.0.2"
     GIT_URL = "https://github.com/briehl/narrative-test"
-    GIT_COMMIT_HASH = "2be7187f6e0116520ed9c16ea689cbb8824d5422"
+    GIT_COMMIT_HASH = "5b360a818f37303e79f7df1ba74cd68e3dd04589"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -266,6 +267,63 @@ class NarrativeTest:
                              'result is not type dict as required.')
         # return the results
         return [result]
+
+    def app_succeed(self, ctx, param):
+        """
+        A simple function that should always succeed immediately (just returns the string passed to it)
+        :param param: instance of String
+        :returns: instance of String
+        """
+        # ctx is the context object
+        # return variables are: param
+        #BEGIN app_succeed
+        #END app_succeed
+
+        # At some point might do deeper type checking...
+        if not isinstance(param, str):
+            raise ValueError('Method app_succeed return value ' +
+                             'param is not type str as required.')
+        # return the results
+        return [param]
+
+    def app_fail(self, ctx):
+        """
+        A simple function that always fails, throwing an error.
+        """
+        # ctx is the context object
+        #BEGIN app_fail
+        raise RuntimeError("Raising an error because that's what we do here.")
+        #END app_fail
+        pass
+
+    def app_sleep(self, ctx, param):
+        """
+        A slightly more complex function that runs for a given time (in seconds) before exiting. (negative values are treated as zero)
+        Can also end in failure. If successful, returns how long it slept.
+        :param param: instance of type "SleepParams" (naptime - int - sleep
+           time in seconds fail - boolean - if true, this always throws an
+           error) -> structure: parameter "naptime" of Long, parameter "fail"
+           of type "boolean" (if 0, treat as false, any other value treat as
+           true)
+        :returns: instance of Long
+        """
+        # ctx is the context object
+        # return variables are: naptime
+        #BEGIN app_sleep
+        naptime = param.get('naptime', 0)
+        if not isinstance(naptime, int) or naptime < 0:
+            naptime = 0
+        time.sleep(naptime)
+        if param.get('fail', 0):
+            raise RuntimeError('App woke up from its nap very cranky!')
+        #END app_sleep
+
+        # At some point might do deeper type checking...
+        if not isinstance(naptime, int):
+            raise ValueError('Method app_sleep return value ' +
+                             'naptime is not type int as required.')
+        # return the results
+        return [naptime]
     def status(self, ctx):
         #BEGIN_STATUS
         returnVal = {'state': "OK",

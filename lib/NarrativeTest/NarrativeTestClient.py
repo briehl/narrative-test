@@ -164,6 +164,36 @@ class NarrativeTest(object):
         return self._client.call_method('NarrativeTest.introspect_job_info',
                                         [params], self._service_ver, context)
 
+    def app_succeed(self, param, context=None):
+        """
+        A simple function that should always succeed immediately (just returns the string passed to it)
+        :param param: instance of String
+        :returns: instance of String
+        """
+        return self._client.call_method('NarrativeTest.app_succeed',
+                                        [param], self._service_ver, context)
+
+    def app_fail(self, context=None):
+        """
+        A simple function that always fails, throwing an error.
+        """
+        return self._client.call_method('NarrativeTest.app_fail',
+                                        [], self._service_ver, context)
+
+    def app_sleep(self, param, context=None):
+        """
+        A slightly more complex function that runs for a given time (in seconds) before exiting. (negative values are treated as zero)
+        Can also end in failure. If successful, returns how long it slept.
+        :param param: instance of type "SleepParams" (naptime - int - sleep
+           time in seconds fail - boolean - if true, this always throws an
+           error) -> structure: parameter "naptime" of Long, parameter "fail"
+           of type "boolean" (if 0, treat as false, any other value treat as
+           true)
+        :returns: instance of Long
+        """
+        return self._client.call_method('NarrativeTest.app_sleep',
+                                        [param], self._service_ver, context)
+
     def status(self, context=None):
         return self._client.call_method('NarrativeTest.status',
                                         [], self._service_ver, context)

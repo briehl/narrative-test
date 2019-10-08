@@ -3,6 +3,9 @@ A KBase module: NarrativeTest
 */
 
 module NarrativeTest {
+    /* if 0, treat as false, any other value treat as true */
+    typedef int boolean;
+
     /*
         A string representing a ContigSet id.
     */
@@ -168,4 +171,29 @@ module NarrativeTest {
     } IntrospectResult;
 
     funcdef introspect_job_info(IntrospectParams params) returns (IntrospectResult result) authentication required;
+
+    /*
+      A simple function that should always succeed immediately (just returns the string passed to it)
+    */
+    funcdef app_succeed(string param) returns (string param) authentication required;
+
+    /*
+      A simple function that always fails, throwing an error.
+    */
+    funcdef app_fail() returns () authentication required;
+
+    /*
+      naptime - int - sleep time in seconds
+      fail - boolean - if true, this always throws an error
+    */
+    typedef structure {
+      int naptime;
+      boolean fail;
+    } SleepParams;
+
+    /*
+      A slightly more complex function that runs for a given time (in seconds) before exiting. (negative values are treated as zero)
+      Can also end in failure. If successful, returns how long it slept.
+    */
+    funcdef app_sleep(SleepParams param) returns (int naptime) authentication required;
 };
