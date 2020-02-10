@@ -1,0 +1,34 @@
+name     : HTML Report with links
+subtitle : Show an example HTML Report
+tooltip  : Show an example HTML Report
+
+screenshots :
+    []
+
+suggestions :
+    apps:
+        related :
+            []
+        next :
+            []
+    methods:
+        related :
+            []
+        next :
+            []
+
+parameters :
+    num_pages:
+        ui-name: Number of Pages
+        short-hint: Set the number of pages
+        long-hint: This is the number of pages that will be generated for the report.
+
+    initial_page:
+        ui-name: Initial Page
+        short-hint: The first page to show
+        long-hint: This sets the first page to show in your multipage report.
+
+description : |
+    <p>Demonstrate a KBase HTML Report using some simple inputs.</p>
+
+technical-description : none

@@ -12,6 +12,48 @@ class ExampleReport(object):
         self.report_client = KBaseReport(callback_url)
         self.dfu_client = DataFileUtil(callback_url)
 
+    def run_html_links(self, params):
+        """
+        params is a dict with the following keys:
+        * workspace_name: name of the workspace to save the report
+        * num_pages: number of html link pages to use
+        * initial_page: initial page to show
+        Each page is very very simple. Just has some generated text saying it's
+        a report on page x.
+        """
+        num_pages = params.get("num_pages", 1)
+        report_dir = os.path.join(self.scratch_dir, str(uuid.uuid4()))
+        self._mkdir_p(report_dir)
+        html_links = list()
+        for i in range(num_pages):
+            report_file_content = """
+            <html>
+                <body>
+                    <div>I am an HTML report! This is page {} of {}</div>
+                </body>
+            </html>
+            """.format(i+1, num_pages)
+            report_filename = "page{}.html".format(i+1)
+            report_file_path = os.path.join(report_dir, report_filename)
+            with open(report_file_path, "w") as fout:
+                fout.write(report_file_content)
+            html_links.append({
+                "name": report_filename,
+                "description": "Report page {}".format(i+1),
+                "path": report_dir
+            })
+        report = self.report_client.create_extended_report({
+            "message": "This is some report message",
+            "html_links": html_links,
+            "direct_html_link_index": int(params.get("initial_page", 1)) - 1,
+            "report_object_name": "NarrativeTest.example_report-" + str(uuid.uuid4()),
+            "workspace_name": params["workspace_name"]
+        })
+        return {
+            "report_ref": report["ref"],
+            "report_name": report["name"]
+        }
+
     def run(self, params):
         """
         params should have the following:

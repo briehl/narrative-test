@@ -901,6 +901,106 @@ report_ref is a string
  
 
 
+=head2 report_html_links
+
+  $result = $obj->report_html_links($params)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$params is a NarrativeTest.ReportHtmlLinksParams
+$result is a NarrativeTest.ExampleReportResult
+ReportHtmlLinksParams is a reference to a hash where the following keys are defined:
+	num_pages has a value which is an int
+	initial_page has a value which is an int
+	workspace_name has a value which is a string
+ExampleReportResult is a reference to a hash where the following keys are defined:
+	report_name has a value which is a NarrativeTest.report_name
+	report_ref has a value which is a NarrativeTest.report_ref
+report_name is a string
+report_ref is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+$params is a NarrativeTest.ReportHtmlLinksParams
+$result is a NarrativeTest.ExampleReportResult
+ReportHtmlLinksParams is a reference to a hash where the following keys are defined:
+	num_pages has a value which is an int
+	initial_page has a value which is an int
+	workspace_name has a value which is a string
+ExampleReportResult is a reference to a hash where the following keys are defined:
+	report_name has a value which is a NarrativeTest.report_name
+	report_ref has a value which is a NarrativeTest.report_ref
+report_name is a string
+report_ref is a string
+
+
+=end text
+
+=item Description
+
+
+
+=back
+
+=cut
+
+ sub report_html_links
+{
+    my($self, @args) = @_;
+
+# Authentication: required
+
+    if ((my $n = @args) != 1)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function report_html_links (received $n, expecting 1)");
+    }
+    {
+	my($params) = @args;
+
+	my @_bad_arguments;
+        (ref($params) eq 'HASH') or push(@_bad_arguments, "Invalid type for argument 1 \"params\" (value was \"$params\")");
+        if (@_bad_arguments) {
+	    my $msg = "Invalid arguments passed to report_html_links:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	    Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+								   method_name => 'report_html_links');
+	}
+    }
+
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "NarrativeTest.report_html_links",
+	    params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'report_html_links',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return wantarray ? @{$result->result} : $result->result->[0];
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method report_html_links",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'report_html_links',
+				       );
+    }
+}
+ 
+
+
 =head2 introspect_job_info
 
   $result = $obj->introspect_job_info($params)
@@ -2190,6 +2290,40 @@ report_ref has a value which is a NarrativeTest.report_ref
 a reference to a hash where the following keys are defined:
 report_name has a value which is a NarrativeTest.report_name
 report_ref has a value which is a NarrativeTest.report_ref
+
+
+=end text
+
+=back
+
+
+
+=head2 ReportHtmlLinksParams
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+num_pages has a value which is an int
+initial_page has a value which is an int
+workspace_name has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+num_pages has a value which is an int
+initial_page has a value which is an int
+workspace_name has a value which is a string
 
 
 =end text

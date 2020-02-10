@@ -160,6 +160,15 @@ module NarrativeTest {
       returns (ExampleReportResult result) authentication required;
 
     typedef structure {
+      int num_pages;
+      int initial_page;
+      string workspace_name;
+    } ReportHtmlLinksParams;
+
+    funcdef report_html_links(ReportHtmlLinksParams params)
+      returns (ExampleReportResult result) authentication required;
+
+    typedef structure {
         string param1;
         string param2;
     } IntrospectParams;

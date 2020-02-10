@@ -151,6 +151,18 @@ class NarrativeTest(object):
         return self._client.call_method('NarrativeTest.example_report',
                                         [params], self._service_ver, context)
 
+    def report_html_links(self, params, context=None):
+        """
+        :param params: instance of type "ReportHtmlLinksParams" -> structure:
+           parameter "num_pages" of Long, parameter "initial_page" of Long,
+           parameter "workspace_name" of String
+        :returns: instance of type "ExampleReportResult" -> structure:
+           parameter "report_name" of type "report_name", parameter
+           "report_ref" of type "report_ref"
+        """
+        return self._client.call_method('NarrativeTest.report_html_links',
+                                        [params], self._service_ver, context)
+
     def introspect_job_info(self, params, context=None):
         """
         :param params: instance of type "IntrospectParams" -> structure:

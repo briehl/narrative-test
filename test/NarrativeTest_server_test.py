@@ -95,9 +95,6 @@ class NarrativeTestTest(unittest.TestCase):
         pass
 
     def test_example_report(self):
-        print('I AM TESTING')
-        print(self.getWsId())
-        print(self.getWsName())
         report_result = self.getImpl().example_report(
             self.getContext(),
             {
@@ -108,6 +105,21 @@ class NarrativeTestTest(unittest.TestCase):
         )[0]
         self.assertIn('report_ref', report_result)
         self.assertIn('report_name', report_result)
+
+    def test_report_html_links(self):
+        report_result = self.getImpl().report_html_links(
+            self.getContext(),
+            {
+                "workspace_name": self.getWsName(),
+                "num_pages": 3,
+                "initial_page": 1
+            }
+        )[0]
+        self.assertIn("report_ref", report_result)
+        self.assertIn("report_name", report_result)
+        ws = self.getWsClient()
+        report = ws.get_objects2({"objects": [{"ref": report_result["report_ref"]}]})["data"][0]["data"]
+        print(report)
 
     def test_app_succeed(self):
         param = "some_param"

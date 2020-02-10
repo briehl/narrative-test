@@ -25,7 +25,7 @@ class NarrativeTest:
     ######################################### noqa
     VERSION = "0.0.2"
     GIT_URL = "https://github.com/briehl/narrative-test"
-    GIT_COMMIT_HASH = "5b360a818f37303e79f7df1ba74cd68e3dd04589"
+    GIT_COMMIT_HASH = "ce273c5ba9f7aae461a78a861be3e0949095f2c6"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -231,6 +231,29 @@ class NarrativeTest:
         # At some point might do deeper type checking...
         if not isinstance(result, dict):
             raise ValueError('Method example_report return value ' +
+                             'result is not type dict as required.')
+        # return the results
+        return [result]
+
+    def report_html_links(self, ctx, params):
+        """
+        :param params: instance of type "ReportHtmlLinksParams" -> structure:
+           parameter "num_pages" of Long, parameter "initial_page" of Long,
+           parameter "workspace_name" of String
+        :returns: instance of type "ExampleReportResult" -> structure:
+           parameter "report_name" of type "report_name", parameter
+           "report_ref" of type "report_ref"
+        """
+        # ctx is the context object
+        # return variables are: result
+        #BEGIN report_html_links
+        report_maker = ExampleReport(self.callbackURL, self.scratch_dir)
+        result = report_maker.run_html_links(params)
+        #END report_html_links
+
+        # At some point might do deeper type checking...
+        if not isinstance(result, dict):
+            raise ValueError('Method report_html_links return value ' +
                              'result is not type dict as required.')
         # return the results
         return [result]
