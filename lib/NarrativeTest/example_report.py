@@ -18,6 +18,7 @@ class ExampleReport(object):
         * workspace_name: name of the workspace to save the report
         * num_pages: number of html link pages to use
         * initial_page: initial page to show
+        * include_direct_html: if 1, then write something to the direct_html field as well.
         Each page is very very simple. Just has some generated text saying it's
         a report on page x.
         """
@@ -42,13 +43,22 @@ class ExampleReport(object):
                 "description": "Report page {}".format(i+1),
                 "path": report_dir
             })
-        report = self.report_client.create_extended_report({
-            "message": "This is some report message",
-            "html_links": html_links,
-            "direct_html_link_index": int(params.get("initial_page", 1)) - 1,
+        direct_html = None
+        if params.get("include_direct_html", 0) != 0:
+            direct_html = "Here is some direct html for your Narrative perusal."
+
+        report_params = {
+            "message": "Here is an example report",
             "report_object_name": "NarrativeTest.example_report-" + str(uuid.uuid4()),
             "workspace_name": params["workspace_name"]
-        })
+        }
+        if direct_html is not None:
+            report_params["direct_html"] = direct_html
+        if num_pages > 0:
+            report_params["html_links"] = html_links
+            report_params["direct_html_link_index"] = int(params.get("initial_page", 1)) - 1
+
+        report = self.report_client.create_extended_report(report_params)
         return {
             "report_ref": report["ref"],
             "report_name": report["name"]

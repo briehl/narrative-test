@@ -28,6 +28,11 @@ parameters :
         short-hint: The first page to show
         long-hint: This sets the first page to show in your multipage report.
 
+    include_direct:
+        ui-name: Use direct HTML
+        short-hint: Select to include a "direct_html" entry
+        long-hint: Using a direct_html entry and no pages should show the direct_html as the report.
+
 description : |
     <p>Demonstrate a KBase HTML Report using some simple inputs.</p>
 

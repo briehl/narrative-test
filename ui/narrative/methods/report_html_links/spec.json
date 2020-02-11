@@ -28,11 +28,22 @@
       "optional": true,
       "advanced": false,
       "allow_multiple": false,
-      "default_values": 0,
+      "default_values": [ 1 ],
       "field_type": "text",
       "text_options": {
         "validate_as": "int",
         "min_int": 1
+      }
+    },
+    {
+      "id": "include_direct",
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "field_type": "checkbox",
+      "checkbox_options": {
+          "checked_value": 1,
+          "unchecked_value": 0
       }
     }
   ],
@@ -56,6 +67,10 @@
         {
           "input_parameter": "initial_page",
           "target_property": "initial_page"
+        },
+        {
+          "input_parameter": "include_direct",
+          "target_property": "include_direct_html"
         }
       ],
       "output_mapping" :

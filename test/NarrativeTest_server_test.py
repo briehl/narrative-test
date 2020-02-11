@@ -119,7 +119,44 @@ class NarrativeTestTest(unittest.TestCase):
         self.assertIn("report_name", report_result)
         ws = self.getWsClient()
         report = ws.get_objects2({"objects": [{"ref": report_result["report_ref"]}]})["data"][0]["data"]
-        print(report)
+        self.assertEqual(len(report["html_links"]), 3)
+        self.assertEqual(report["direct_html_link_index"], 0)
+        self.assertIsNone(report["direct_html"])
+
+    def test_report_html_links_direct(self):
+        report_result = self.getImpl().report_html_links(
+            self.getContext(),
+            {
+                "workspace_name": self.getWsName(),
+                "num_pages": 3,
+                "initial_page": 2,
+                "include_direct_html": 1
+            }
+        )[0]
+        self.assertIn("report_ref", report_result)
+        self.assertIn("report_name", report_result)
+        ws = self.getWsClient()
+        report = ws.get_objects2({"objects": [{"ref": report_result["report_ref"]}]})["data"][0]["data"]
+        self.assertEqual(len(report["html_links"]), 3)
+        self.assertEqual(report["direct_html_link_index"], 1)
+        self.assertIsNotNone(report["direct_html"])
+
+    def test_report_html_links_only_direct(self):
+        report_result = self.getImpl().report_html_links(
+            self.getContext(),
+            {
+                "workspace_name": self.getWsName(),
+                "num_pages": 0,
+                "include_direct_html": 1
+            }
+        )[0]
+        self.assertIn("report_ref", report_result)
+        self.assertIn("report_name", report_result)
+        ws = self.getWsClient()
+        report = ws.get_objects2({"objects": [{"ref": report_result["report_ref"]}]})["data"][0]["data"]
+        self.assertEqual(len(report["html_links"]), 0)
+        self.assertEqual(report["direct_html_link_index"], None)
+        self.assertIsNotNone(report["direct_html"])
 
     def test_app_succeed(self):
         param = "some_param"

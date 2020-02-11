@@ -155,7 +155,9 @@ class NarrativeTest(object):
         """
         :param params: instance of type "ReportHtmlLinksParams" -> structure:
            parameter "num_pages" of Long, parameter "initial_page" of Long,
-           parameter "workspace_name" of String
+           parameter "workspace_name" of String, parameter
+           "include_direct_html" of type "boolean" (if 0, treat as false, any
+           other value treat as true)
         :returns: instance of type "ExampleReportResult" -> structure:
            parameter "report_name" of type "report_name", parameter
            "report_ref" of type "report_ref"
