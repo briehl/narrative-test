@@ -33,6 +33,11 @@ parameters :
         short-hint: Select to include a "direct_html" entry
         long-hint: Using a direct_html entry and no pages should show the direct_html as the report.
 
+    num_files:
+        ui-name: Number of files
+        short-hint: How many files to make
+        long-hint: If > 0, this makes a number of tiny downloadable files.
+
 description : |
     <p>Demonstrate a KBase HTML Report using some simple inputs.</p>
 

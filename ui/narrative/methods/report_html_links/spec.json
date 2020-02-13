@@ -45,6 +45,17 @@
           "checked_value": 1,
           "unchecked_value": 0
       }
+    },
+    {
+      "id": "num_files",
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "field_type": "text",
+      "text_options": {
+        "validate_as": "int",
+        "min_int": 0
+      }
     }
   ],
   "behavior" :
@@ -71,6 +82,10 @@
         {
           "input_parameter": "include_direct",
           "target_property": "include_direct_html"
+        },
+        {
+          "input_parameter": "num_files",
+          "target_property": "num_files"
         }
       ],
       "output_mapping" :

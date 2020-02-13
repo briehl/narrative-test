@@ -919,6 +919,7 @@ ReportHtmlLinksParams is a reference to a hash where the following keys are defi
 	initial_page has a value which is an int
 	workspace_name has a value which is a string
 	include_direct_html has a value which is a NarrativeTest.boolean
+	num_files has a value which is an int
 boolean is an int
 ExampleReportResult is a reference to a hash where the following keys are defined:
 	report_name has a value which is a NarrativeTest.report_name
@@ -939,6 +940,7 @@ ReportHtmlLinksParams is a reference to a hash where the following keys are defi
 	initial_page has a value which is an int
 	workspace_name has a value which is a string
 	include_direct_html has a value which is a NarrativeTest.boolean
+	num_files has a value which is an int
 boolean is an int
 ExampleReportResult is a reference to a hash where the following keys are defined:
 	report_name has a value which is a NarrativeTest.report_name
@@ -2318,6 +2320,7 @@ num_pages has a value which is an int
 initial_page has a value which is an int
 workspace_name has a value which is a string
 include_direct_html has a value which is a NarrativeTest.boolean
+num_files has a value which is an int
 
 </pre>
 
@@ -2330,6 +2333,7 @@ num_pages has a value which is an int
 initial_page has a value which is an int
 workspace_name has a value which is a string
 include_direct_html has a value which is a NarrativeTest.boolean
+num_files has a value which is an int
 
 
 =end text

@@ -164,6 +164,7 @@ module NarrativeTest {
       int initial_page;
       string workspace_name;
       boolean include_direct_html;
+      int num_files;
     } ReportHtmlLinksParams;
 
     funcdef report_html_links(ReportHtmlLinksParams params)

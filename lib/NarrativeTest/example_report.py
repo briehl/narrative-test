@@ -17,6 +17,7 @@ class ExampleReport(object):
         params is a dict with the following keys:
         * workspace_name: name of the workspace to save the report
         * num_pages: number of html link pages to use
+        * num_files: number of little text files to generate (if 0, won't make any)
         * initial_page: initial page to show
         * include_direct_html: if 1, then write something to the direct_html field as well.
         Each page is very very simple. Just has some generated text saying it's
@@ -52,6 +53,20 @@ class ExampleReport(object):
             "report_object_name": "NarrativeTest.example_report-" + str(uuid.uuid4()),
             "workspace_name": params["workspace_name"]
         }
+        num_files = params.get("num_files", 0)
+        if num_files > 0:
+            report_params["file_links"] = list()
+            for i in range(num_files):
+                filename = "file_number_" + str(i+1) + ".txt"
+                file_path = os.path.join(report_dir, filename)
+                with open(file_path, "w") as fout:
+                    fout.write("This is simple file number {} of {}".format((i+1), num_files))
+                report_params["file_links"].append({
+                    "name": filename,
+                    "description": "Simple test file " + str(i+1),
+                    "path": file_path
+                })
+
         if direct_html is not None:
             report_params["direct_html"] = direct_html
         if num_pages > 0:

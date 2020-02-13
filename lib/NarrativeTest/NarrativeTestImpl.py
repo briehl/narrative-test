@@ -25,7 +25,7 @@ class NarrativeTest:
     ######################################### noqa
     VERSION = "0.0.2"
     GIT_URL = "https://github.com/briehl/narrative-test"
-    GIT_COMMIT_HASH = "8cbef46ffa4fbc503714bc63e8ef1dee53fe4fcd"
+    GIT_COMMIT_HASH = "84738351645e027a3b9d5adc9b8551c4c4c82c73"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -241,7 +241,7 @@ class NarrativeTest:
            parameter "num_pages" of Long, parameter "initial_page" of Long,
            parameter "workspace_name" of String, parameter
            "include_direct_html" of type "boolean" (if 0, treat as false, any
-           other value treat as true)
+           other value treat as true), parameter "num_files" of Long
         :returns: instance of type "ExampleReportResult" -> structure:
            parameter "report_name" of type "report_name", parameter
            "report_ref" of type "report_ref"
