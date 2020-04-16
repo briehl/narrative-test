@@ -1,0 +1,32 @@
+#
+# define display information
+#
+name: App Logs
+tooltip: |
+    A test app that generates a number of log lines with a unique string attached.
+screenshots: []
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+parameters:
+    num_lines:
+        ui-name: |
+            Number of lines
+        short-hint: |
+            Number of log lines to generates
+
+description : |
+    <p>This is a simple method that generates a number of log lines, one per second. It includes a generated 10-character string along with those lines to uniquely identify the job that generated them (note that this isn't the same as the job id).</p>

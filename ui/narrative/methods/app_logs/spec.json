@@ -1,0 +1,46 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "wjriehl"
+    ],
+    "contact": "wjriehl@lbl.gov",
+    "visible": true,
+    "categories": ["active"],
+    "widgets": {
+        "input": null,
+        "output": null
+    },
+    "parameters": [{
+        "id": "num_lines",
+        "optional": false,
+        "advanced": false,
+        "allow_multiple": false,
+        "default_values": [ "100" ],
+        "field_type": "text",
+        "text_options": {
+            "valid_ws_types" : [ ],
+            "validate_as": "int",
+            "min_int" : 0
+        }
+    }],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "NarrativeTest",
+            "method": "app_logs",
+            "input_mapping": [{
+                "input_parameter": "num_lines",
+                "target_property": "num_lines"
+            }],
+            "output_mapping": [{
+                "service_method_output_path": [0, "num_lines"],
+                "target_property": "num_lines"
+            },
+            {
+                "service_method_output_path": [0, "prefix"],
+                "target_property": "unique_string"
+            }]
+        }
+    },
+    "job_id_output_field": "docker"
+}
