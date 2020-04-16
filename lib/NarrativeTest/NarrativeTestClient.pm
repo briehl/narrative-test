@@ -1339,6 +1339,98 @@ Can also end in failure. If successful, returns how long it slept.
     }
 }
  
+
+
+=head2 app_logs
+
+  $result = $obj->app_logs($param)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$param is a NarrativeTest.AppLogParams
+$result is a NarrativeTest.AppLogResult
+AppLogParams is a reference to a hash where the following keys are defined:
+	num_lines has a value which is an int
+AppLogResult is a reference to a hash where the following keys are defined:
+	num_lines has a value which is an int
+	prefix has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+$param is a NarrativeTest.AppLogParams
+$result is a NarrativeTest.AppLogResult
+AppLogParams is a reference to a hash where the following keys are defined:
+	num_lines has a value which is an int
+AppLogResult is a reference to a hash where the following keys are defined:
+	num_lines has a value which is an int
+	prefix has a value which is a string
+
+
+=end text
+
+=item Description
+
+A simple app that puts out a number of log lines, one per second, until done. This way we can test the log viewer.
+
+=back
+
+=cut
+
+ sub app_logs
+{
+    my($self, @args) = @_;
+
+# Authentication: required
+
+    if ((my $n = @args) != 1)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function app_logs (received $n, expecting 1)");
+    }
+    {
+	my($param) = @args;
+
+	my @_bad_arguments;
+        (ref($param) eq 'HASH') or push(@_bad_arguments, "Invalid type for argument 1 \"param\" (value was \"$param\")");
+        if (@_bad_arguments) {
+	    my $msg = "Invalid arguments passed to app_logs:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	    Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+								   method_name => 'app_logs');
+	}
+    }
+
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "NarrativeTest.app_logs",
+	    params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'app_logs',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return wantarray ? @{$result->result} : $result->result->[0];
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method app_logs",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'app_logs',
+				       );
+    }
+}
+ 
   
 sub status
 {
@@ -1382,16 +1474,16 @@ sub version {
             Bio::KBase::Exceptions::JSONRPC->throw(
                 error => $result->error_message,
                 code => $result->content->{code},
-                method_name => 'app_sleep',
+                method_name => 'app_logs',
             );
         } else {
             return wantarray ? @{$result->result} : $result->result->[0];
         }
     } else {
         Bio::KBase::Exceptions::HTTP->throw(
-            error => "Error invoking method app_sleep",
+            error => "Error invoking method app_logs",
             status_line => $self->{client}->status_line,
-            method_name => 'app_sleep',
+            method_name => 'app_logs',
         );
     }
 }
@@ -2438,6 +2530,68 @@ fail has a value which is a NarrativeTest.boolean
 a reference to a hash where the following keys are defined:
 naptime has a value which is an int
 fail has a value which is a NarrativeTest.boolean
+
+
+=end text
+
+=back
+
+
+
+=head2 AppLogParams
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+num_lines has a value which is an int
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+num_lines has a value which is an int
+
+
+=end text
+
+=back
+
+
+
+=head2 AppLogResult
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+num_lines has a value which is an int
+prefix has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+num_lines has a value which is an int
+prefix has a value which is a string
 
 
 =end text

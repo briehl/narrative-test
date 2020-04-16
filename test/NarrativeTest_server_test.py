@@ -196,3 +196,10 @@ class NarrativeTestTest(unittest.TestCase):
             self.getImpl().app_sleep(self.getContext(), {"naptime": 1, "fail": 1})
         self.assertIn("App woke up from its nap very cranky!", str(e.exception))
 
+    def test_app_logs(self):
+        num_lines = 5
+        ret = self.getImpl().app_logs(self.getContext(), {"num_lines": num_lines})[0]
+        self.assertIn("prefix", ret)
+        self.assertEqual(10, len(ret["prefix"]))
+        self.assertEqual(ret.get("num_lines"), num_lines)
+

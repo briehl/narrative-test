@@ -5,6 +5,8 @@ from NarrativeTest.example_report import ExampleReport
 from copy import deepcopy
 import os
 import time
+import random
+import string
 #END_HEADER
 
 
@@ -25,7 +27,7 @@ class NarrativeTest:
     ######################################### noqa
     VERSION = "0.0.2"
     GIT_URL = "https://github.com/briehl/narrative-test"
-    GIT_COMMIT_HASH = "84738351645e027a3b9d5adc9b8551c4c4c82c73"
+    GIT_COMMIT_HASH = "25496c5ebfdaec8045b5fd9049aeff5efd4a3834"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -349,6 +351,42 @@ class NarrativeTest:
                              'naptime is not type int as required.')
         # return the results
         return [naptime]
+
+    def app_logs(self, ctx, param):
+        """
+        A simple app that puts out a number of log lines, one per second, until done. This way we can test the log viewer.
+        :param param: instance of type "AppLogParams" -> structure: parameter
+           "num_lines" of Long
+        :returns: instance of type "AppLogResult" -> structure: parameter
+           "num_lines" of Long, parameter "prefix" of String
+        """
+        # ctx is the context object
+        # return variables are: result
+        #BEGIN app_logs
+        num_lines = param.get("num_lines", 1)
+        prefix = ''.join(random.choice(string.ascii_uppercase) for i in range(10))
+
+        if num_lines <= 0:
+            num_lines = 1
+
+        print(f'Starting app_logs job with prefix {prefix}')
+        for i in range(num_lines):
+            time.sleep(1)
+            print(f'Line {i+1} - job {prefix}')
+
+        result = {
+            "prefix": prefix,
+            "num_lines": num_lines
+        }
+
+        #END app_logs
+
+        # At some point might do deeper type checking...
+        if not isinstance(result, dict):
+            raise ValueError('Method app_logs return value ' +
+                             'result is not type dict as required.')
+        # return the results
+        return [result]
     def status(self, ctx):
         #BEGIN_STATUS
         returnVal = {'state': "OK",

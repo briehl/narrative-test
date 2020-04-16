@@ -208,6 +208,17 @@ class NarrativeTest(object):
         return self._client.call_method('NarrativeTest.app_sleep',
                                         [param], self._service_ver, context)
 
+    def app_logs(self, param, context=None):
+        """
+        A simple app that puts out a number of log lines, one per second, until done. This way we can test the log viewer.
+        :param param: instance of type "AppLogParams" -> structure: parameter
+           "num_lines" of Long
+        :returns: instance of type "AppLogResult" -> structure: parameter
+           "num_lines" of Long, parameter "prefix" of String
+        """
+        return self._client.call_method('NarrativeTest.app_logs',
+                                        [param], self._service_ver, context)
+
     def status(self, context=None):
         return self._client.call_method('NarrativeTest.status',
                                         [], self._service_ver, context)

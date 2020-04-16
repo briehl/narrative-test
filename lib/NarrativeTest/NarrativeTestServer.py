@@ -390,6 +390,10 @@ class Application(object):
                              name='NarrativeTest.app_sleep',
                              types=[dict])
         self.method_authentication['NarrativeTest.app_sleep'] = 'required'  # noqa
+        self.rpc_service.add(impl_NarrativeTest.app_logs,
+                             name='NarrativeTest.app_logs',
+                             types=[dict])
+        self.method_authentication['NarrativeTest.app_logs'] = 'required'  # noqa
         self.rpc_service.add(impl_NarrativeTest.status,
                              name='NarrativeTest.status',
                              types=[dict])

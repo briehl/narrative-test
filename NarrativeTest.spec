@@ -207,4 +207,18 @@ module NarrativeTest {
       Can also end in failure. If successful, returns how long it slept.
     */
     funcdef app_sleep(SleepParams param) returns (int naptime) authentication required;
+
+    typedef structure {
+      int num_lines;
+    } AppLogParams;
+
+    typedef structure {
+      int num_lines;
+      string prefix;
+    } AppLogResult;
+
+    /*
+      A simple app that puts out a number of log lines, one per second, until done. This way we can test the log viewer.
+    */
+    funcdef app_logs(AppLogParams param) returns (AppLogResult result) authentication required;
 };
