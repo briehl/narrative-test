@@ -63,11 +63,11 @@ class NarrativeTest:
         #END test_async_job
 
         # At some point might do deeper type checking...
-        if not isinstance(returnVal, dict):
+        if not isinstance(params, dict):
             raise ValueError('Method test_async_job return value ' +
                              'returnVal is not type dict as required.')
         # return the results
-        return [returnVal]
+        return [params]
 
     def test_editor(self, ctx, editor, workspace):
         """
@@ -101,11 +101,11 @@ class NarrativeTest:
         #END save_reads_set_v1
 
         # At some point might do deeper type checking...
-        if not isinstance(outputs, object):
+        if not isinstance(inputs, object):
             raise ValueError('Method save_reads_set_v1 return value ' +
-                             'outputs is not type object as required.')
+                             'inputs is not type object as required.')
         # return the results
-        return [outputs]
+        return [inputs]
 
     def test_param_groups(self, ctx, params):
         """
@@ -124,11 +124,11 @@ class NarrativeTest:
         #END test_param_groups
 
         # At some point might do deeper type checking...
-        if not isinstance(returnVal, dict):
+        if not isinstance(params, dict):
             raise ValueError('Method test_param_groups return value ' +
-                             'returnVal is not type dict as required.')
+                             'params is not type dict as required.')
         # return the results
-        return [returnVal]
+        return [params]
 
     def test_input_mapping(self, ctx, params):
         """
@@ -143,11 +143,11 @@ class NarrativeTest:
         #END test_input_mapping
 
         # At some point might do deeper type checking...
-        if not isinstance(outputs, object):
+        if not isinstance(params, object):
             raise ValueError('Method test_input_mapping return value ' +
-                             'outputs is not type object as required.')
+                             'params is not type object as required.')
         # return the results
-        return [outputs]
+        return [params]
 
     def generic_test(self, ctx, params):
         """
@@ -160,11 +160,11 @@ class NarrativeTest:
         #END generic_test
 
         # At some point might do deeper type checking...
-        if not isinstance(outputs, object):
+        if not isinstance(params, object):
             raise ValueError('Method generic_test return value ' +
                              'outputs is not type object as required.')
         # return the results
-        return [outputs]
+        return [params]
 
     def import_reads_from_staging(self, ctx, params):
         """

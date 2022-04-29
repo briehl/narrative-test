@@ -1,0 +1,32 @@
+name: Test Dyn Drop List
+tooltip: |
+    A simple test app with a list of dynamic dropdowns.
+screenshots: []
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    dyndrop_list :
+        ui-name : |
+            A list of dynamic dropdowns
+        short-hint : |
+            A list of dynamic dropdowns
+
+description : |
+    <p>This is a tiny, simple app intended for testing a list of dynamic dropdown inputs.</p>

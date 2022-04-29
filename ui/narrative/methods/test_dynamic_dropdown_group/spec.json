@@ -1,0 +1,119 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "wjriehl"
+    ],
+    "contact": "help@kbase.us",
+    "visible": true,
+    "categories": ["active"],
+    "widgets": {
+        "input": null,
+        "output": "no-display"
+    },
+    "parameters": [
+        {
+            "id": "genome_ref",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseGenomes.Genome" ]
+            }
+        },
+        {
+            "id": "free_text",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "textarea",
+            "text_options": { }
+        },
+        {
+            "id": "check",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+                "checked_value": 1,
+                "unchecked_value": 0
+            }
+        },
+        {
+            "id": "dyndrop",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "dynamic_dropdown",
+            "dynamic_dropdown_options": {
+                "data_source": "custom",
+                "service_function": "taxonomy_re_api.search_species",
+                "service_version": "dev",
+                "service_params": [
+                    {
+                        "search_text": "prefix:{{dynamic_dropdown_input}}",
+                        "ns": "ncbi_taxonomy",
+                        "limit": 20
+                    }
+                ],
+                "query_on_empty_input": 0,
+                "result_array_index": 0,
+                "path_to_selection_items": ["results"],
+                "selection_id": "ncbi_taxon_id",
+                "exact_match_on": "scientific_name",
+                "description_template": "NCBI Tax ID {{ncbi_taxon_id}}:&nbsp<strong>{{scientific_name}}</strong>",
+                "multiselection": false
+            }
+        }
+    ],
+    "parameter-groups": [
+        {
+          "id": "param_group",
+          "parameters": ["genome_ref", "free_text", "check", "dyndrop"],
+          "optional": false,
+          "allow_multiple": true,
+          "with_border": true
+        }
+    ],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "NarrativeTest",
+            "method": "test_param_groups",
+            "input_mapping": [
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_property": "workspace"
+                },
+                {
+                    "input_parameter": "param_group",
+                    "target_property": "param_group"
+                }
+            ],
+            "output_mapping": [
+                {
+                    "service_method_output_path": [0,"report_name"],
+                    "target_property": "report_name"
+                },
+                {
+                    "service_method_output_path": [0,"report_ref"],
+                    "target_property": "report_ref"
+                },
+                {
+                    "constant_value": "16",
+                    "target_property": "report_window_line_height"
+                },
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_property": "ws"
+                }
+            ]
+        }
+    },
+    "job_id_output_field": "docker"
+}
