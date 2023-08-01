@@ -1,0 +1,198 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "wjriehl"
+    ],
+    "contact": "help@kbase.us",
+    "visible": true,
+    "categories": ["active"],
+    "widgets": {
+        "input": null,
+        "output": null
+    },
+    "parameters": [
+        {
+            "id": "input_object",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseFile.PairedEndLibrary", "KBaseFile.SingleEndLibrary" ]
+            }
+        },
+        {
+            "id": "list_of_objects",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseFile.PairedEndLibrary", "KBaseFile.SingleEndLibrary" ]
+            }
+        },
+        {
+            "id": "single_int",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int",
+                "min_int": -100,
+                "max_int": 100
+            }
+        },
+        {
+            "id": "list_of_ints",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int",
+                "min_int": -100,
+                "max_int": 100
+            }
+        },
+        {
+            "id": "single_float",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": -55.5,
+                "max_float": 55.5
+            }
+        },
+        {
+            "id": "list_of_floats",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": -55.5,
+                "max_float": 55.5
+            }
+        },
+        {
+            "id": "single_int_as_string",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int",
+                "min_int": -10,
+                "max_int": 10
+            }
+        },
+        {
+            "id": "list_of_ints_as_strings",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int",
+                "min_int": -10,
+                "max_int": 10
+            }
+        }
+    ],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "NarrativeTest",
+            "method": "test_input_transform",
+            "input_mapping": [
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_property": "workspace"
+                },
+                {
+                    "input_parameter": "input_object",
+                    "target_property": "input_obj_name"
+                },
+                {
+                    "input_parameter": "input_object",
+                    "target_property": "input_obj_ref",
+                    "target_type_transform": "ref"
+                },
+                {
+                    "input_parameter": "input_object",
+                    "target_property": "input_obj_unresolved_ref",
+                    "target_type_transform": "unresolved-ref"
+                },
+                {
+                    "input_parameter": "input_object",
+                    "target_property": "input_obj_resolved_ref",
+                    "target_type_transform": "resolved-ref"
+                },
+                {
+                    "input_parameter": "input_object",
+                    "target_property": "input_obj_upa",
+                    "target_type_transform": "upa"
+                },
+                {
+                    "input_parameter": "list_of_objects",
+                    "target_property": "input_obj_names"
+                },
+                {
+                    "input_parameter": "list_of_objects",
+                    "target_property": "input_obj_refs",
+                    "target_type_transform": "list<ref>"
+                },
+                {
+                    "input_parameter": "list_of_objects",
+                    "target_property": "input_obj_unresolved_refs",
+                    "target_type_transform": "list<unresolved-ref>"
+                },
+                {
+                    "input_parameter": "list_of_objects",
+                    "target_property": "input_obj_resolved_refs",
+                    "target_type_transform": "list<resolved-ref>"
+                },
+                {
+                    "input_parameter": "list_of_objects",
+                    "target_property": "input_obj_upas",
+                    "target_type_transform": "list<upa>"
+                },
+                {
+                    "input_parameter": "single_int",
+                    "target_property": "single_int",
+                    "target_type_transform": "int"
+                },
+                {
+                    "input_parameter": "list_of_ints",
+                    "target_property": "list_of_ints",
+                    "target_type_transform": "list<int>"
+                },
+                {
+                    "input_parameter": "single_int_as_string",
+                    "target_property": "single_string_int",
+                    "target_type_transform": "string"
+                },
+                {
+                    "input_parameter": "list_of_ints_as_strings",
+                    "target_property": "list_of_string_ints",
+                    "target_type_transform": "list<string>"
+                }
+            ],
+            "output_mapping": []
+        }
+    },
+    "job_id_output_field": "docker"
+}

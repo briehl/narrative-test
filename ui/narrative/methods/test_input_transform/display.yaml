@@ -1,0 +1,72 @@
+#
+# define display information
+#
+name: Test Input Transformations
+tooltip: |
+    Used for testing that input parameters are transformed during validation.
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    input_object :
+        ui-name : |
+            A single input reads object, send the name
+        short-hint : |
+            A single Reads object
+    list_of_objects:
+        ui-name : |
+            A list of input objects
+        short-hint : |
+            A list of Reads objects
+    single_int :
+        ui-name : |
+            Single integer
+        short-hint : |
+            Only accept a single int between [-100, 100]
+    list_of_ints :
+        ui-name : |
+            Multiple integers
+        short-hint : |
+            Accept multiple integers between [-100, 100]
+    single_float :
+        ui-name : |
+            Single floating point number
+        short-hint : |
+            Only accept a single float between [-55.5, 55.5]
+    list_of_floats :
+        ui-name : |
+            Multiple floating point numbers
+        short-hint : |
+            Accept multiple floating point numbers between [-55.5, 55.5]
+    single_int_as_string :
+        ui-name : |
+            Single int input, transform to string
+        short-hint : |
+            Accept an int from [-10, 10], translate to a string
+    list_of_ints_as_strings :
+        ui-name : |
+            Multiple int input, transform to strings
+        short-hint : |
+            Accept a list of ints from [-10, 10], translate to a list of strings
+description : |
+    <p>This is a tiny method intended for just automated testing that parameters of different forms validate (or not) as expected.</p>
+    <p>It still runs, though! All it does is make a copy of a genome. Kinda boring, yes, but it's mainly for testing and validation.</p>
