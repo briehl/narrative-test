@@ -1431,6 +1431,126 @@ A simple app that puts out a number of log lines, one per second, until done. Th
     }
 }
  
+
+
+=head2 test_input_transform
+
+  $result = $obj->test_input_transform($params)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$params is a NarrativeTest.InputTransformParams
+$result is a NarrativeTest.InputTransformParams
+InputTransformParams is a reference to a hash where the following keys are defined:
+	input_obj_name has a value which is a string
+	input_obj_ref has a value which is a NarrativeTest.workspace_ref
+	input_obj_unresolved_ref has a value which is a NarrativeTest.workspace_ref
+	input_obj_resolved_ref has a value which is a NarrativeTest.upa
+	input_obj_upa has a value which is a NarrativeTest.upa
+	input_obj_names has a value which is a reference to a list where each element is a string
+	input_obj_refs has a value which is a reference to a list where each element is a NarrativeTest.workspace_ref
+	input_obj_unresolved_refs has a value which is a reference to a list where each element is a NarrativeTest.workspace_ref
+	input_obj_resolved_refs has a value which is a reference to a list where each element is a NarrativeTest.upa
+	input_obj_upas has a value which is a reference to a list where each element is a NarrativeTest.upa
+	single_int has a value which is an int
+	list_of_ints has a value which is a reference to a list where each element is an int
+	single_float has a value which is a float
+	list_of_floats has a value which is a reference to a list where each element is a float
+	single_string_int has a value which is a string
+	list_of_string_ints has a value which is a reference to a list where each element is a string
+workspace_ref is a string
+upa is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+$params is a NarrativeTest.InputTransformParams
+$result is a NarrativeTest.InputTransformParams
+InputTransformParams is a reference to a hash where the following keys are defined:
+	input_obj_name has a value which is a string
+	input_obj_ref has a value which is a NarrativeTest.workspace_ref
+	input_obj_unresolved_ref has a value which is a NarrativeTest.workspace_ref
+	input_obj_resolved_ref has a value which is a NarrativeTest.upa
+	input_obj_upa has a value which is a NarrativeTest.upa
+	input_obj_names has a value which is a reference to a list where each element is a string
+	input_obj_refs has a value which is a reference to a list where each element is a NarrativeTest.workspace_ref
+	input_obj_unresolved_refs has a value which is a reference to a list where each element is a NarrativeTest.workspace_ref
+	input_obj_resolved_refs has a value which is a reference to a list where each element is a NarrativeTest.upa
+	input_obj_upas has a value which is a reference to a list where each element is a NarrativeTest.upa
+	single_int has a value which is an int
+	list_of_ints has a value which is a reference to a list where each element is an int
+	single_float has a value which is a float
+	list_of_floats has a value which is a reference to a list where each element is a float
+	single_string_int has a value which is a string
+	list_of_string_ints has a value which is a reference to a list where each element is a string
+workspace_ref is a string
+upa is a string
+
+
+=end text
+
+=item Description
+
+
+
+=back
+
+=cut
+
+ sub test_input_transform
+{
+    my($self, @args) = @_;
+
+# Authentication: required
+
+    if ((my $n = @args) != 1)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function test_input_transform (received $n, expecting 1)");
+    }
+    {
+	my($params) = @args;
+
+	my @_bad_arguments;
+        (ref($params) eq 'HASH') or push(@_bad_arguments, "Invalid type for argument 1 \"params\" (value was \"$params\")");
+        if (@_bad_arguments) {
+	    my $msg = "Invalid arguments passed to test_input_transform:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	    Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+								   method_name => 'test_input_transform');
+	}
+    }
+
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "NarrativeTest.test_input_transform",
+	    params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'test_input_transform',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return wantarray ? @{$result->result} : $result->result->[0];
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method test_input_transform",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'test_input_transform',
+				       );
+    }
+}
+ 
   
 sub status
 {
@@ -1474,16 +1594,16 @@ sub version {
             Bio::KBase::Exceptions::JSONRPC->throw(
                 error => $result->error_message,
                 code => $result->content->{code},
-                method_name => 'app_logs',
+                method_name => 'test_input_transform',
             );
         } else {
             return wantarray ? @{$result->result} : $result->result->[0];
         }
     } else {
         Bio::KBase::Exceptions::HTTP->throw(
-            error => "Error invoking method app_logs",
+            error => "Error invoking method test_input_transform",
             status_line => $self->{client}->status_line,
-            method_name => 'app_logs',
+            method_name => 'test_input_transform',
         );
     }
 }
@@ -1591,6 +1711,58 @@ a string
 =item Description
 
 A string representing a workspace name.
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a string
+</pre>
+
+=end html
+
+=begin text
+
+a string
+
+=end text
+
+=back
+
+
+
+=head2 workspace_ref
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a string
+</pre>
+
+=end html
+
+=begin text
+
+a string
+
+=end text
+
+=back
+
+
+
+=head2 upa
+
+=over 4
+
 
 
 =item Definition
@@ -2592,6 +2764,66 @@ prefix has a value which is a string
 a reference to a hash where the following keys are defined:
 num_lines has a value which is an int
 prefix has a value which is a string
+
+
+=end text
+
+=back
+
+
+
+=head2 InputTransformParams
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+input_obj_name has a value which is a string
+input_obj_ref has a value which is a NarrativeTest.workspace_ref
+input_obj_unresolved_ref has a value which is a NarrativeTest.workspace_ref
+input_obj_resolved_ref has a value which is a NarrativeTest.upa
+input_obj_upa has a value which is a NarrativeTest.upa
+input_obj_names has a value which is a reference to a list where each element is a string
+input_obj_refs has a value which is a reference to a list where each element is a NarrativeTest.workspace_ref
+input_obj_unresolved_refs has a value which is a reference to a list where each element is a NarrativeTest.workspace_ref
+input_obj_resolved_refs has a value which is a reference to a list where each element is a NarrativeTest.upa
+input_obj_upas has a value which is a reference to a list where each element is a NarrativeTest.upa
+single_int has a value which is an int
+list_of_ints has a value which is a reference to a list where each element is an int
+single_float has a value which is a float
+list_of_floats has a value which is a reference to a list where each element is a float
+single_string_int has a value which is a string
+list_of_string_ints has a value which is a reference to a list where each element is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+input_obj_name has a value which is a string
+input_obj_ref has a value which is a NarrativeTest.workspace_ref
+input_obj_unresolved_ref has a value which is a NarrativeTest.workspace_ref
+input_obj_resolved_ref has a value which is a NarrativeTest.upa
+input_obj_upa has a value which is a NarrativeTest.upa
+input_obj_names has a value which is a reference to a list where each element is a string
+input_obj_refs has a value which is a reference to a list where each element is a NarrativeTest.workspace_ref
+input_obj_unresolved_refs has a value which is a reference to a list where each element is a NarrativeTest.workspace_ref
+input_obj_resolved_refs has a value which is a reference to a list where each element is a NarrativeTest.upa
+input_obj_upas has a value which is a reference to a list where each element is a NarrativeTest.upa
+single_int has a value which is an int
+list_of_ints has a value which is a reference to a list where each element is an int
+single_float has a value which is a float
+list_of_floats has a value which is a reference to a list where each element is a float
+single_string_int has a value which is a string
+list_of_string_ints has a value which is a reference to a list where each element is a string
 
 
 =end text

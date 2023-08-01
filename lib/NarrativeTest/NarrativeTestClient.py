@@ -219,6 +219,40 @@ class NarrativeTest(object):
         return self._client.call_method('NarrativeTest.app_logs',
                                         [param], self._service_ver, context)
 
+    def test_input_transform(self, params, context=None):
+        """
+        :param params: instance of type "InputTransformParams" -> structure:
+           parameter "input_obj_name" of String, parameter "input_obj_ref" of
+           type "workspace_ref", parameter "input_obj_unresolved_ref" of type
+           "workspace_ref", parameter "input_obj_resolved_ref" of type "upa",
+           parameter "input_obj_upa" of type "upa", parameter
+           "input_obj_names" of list of String, parameter "input_obj_refs" of
+           list of type "workspace_ref", parameter
+           "input_obj_unresolved_refs" of list of type "workspace_ref",
+           parameter "input_obj_resolved_refs" of list of type "upa",
+           parameter "input_obj_upas" of list of type "upa", parameter
+           "single_int" of Long, parameter "list_of_ints" of list of Long,
+           parameter "single_float" of Double, parameter "list_of_floats" of
+           list of Double, parameter "single_string_int" of String, parameter
+           "list_of_string_ints" of list of String
+        :returns: instance of type "InputTransformParams" -> structure:
+           parameter "input_obj_name" of String, parameter "input_obj_ref" of
+           type "workspace_ref", parameter "input_obj_unresolved_ref" of type
+           "workspace_ref", parameter "input_obj_resolved_ref" of type "upa",
+           parameter "input_obj_upa" of type "upa", parameter
+           "input_obj_names" of list of String, parameter "input_obj_refs" of
+           list of type "workspace_ref", parameter
+           "input_obj_unresolved_refs" of list of type "workspace_ref",
+           parameter "input_obj_resolved_refs" of list of type "upa",
+           parameter "input_obj_upas" of list of type "upa", parameter
+           "single_int" of Long, parameter "list_of_ints" of list of Long,
+           parameter "single_float" of Double, parameter "list_of_floats" of
+           list of Double, parameter "single_string_int" of String, parameter
+           "list_of_string_ints" of list of String
+        """
+        return self._client.call_method('NarrativeTest.test_input_transform',
+                                        [params], self._service_ver, context)
+
     def status(self, context=None):
         return self._client.call_method('NarrativeTest.status',
                                         [], self._service_ver, context)

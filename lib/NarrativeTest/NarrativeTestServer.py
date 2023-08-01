@@ -394,6 +394,10 @@ class Application(object):
                              name='NarrativeTest.app_logs',
                              types=[dict])
         self.method_authentication['NarrativeTest.app_logs'] = 'required'  # noqa
+        self.rpc_service.add(impl_NarrativeTest.test_input_transform,
+                             name='NarrativeTest.test_input_transform',
+                             types=[dict])
+        self.method_authentication['NarrativeTest.test_input_transform'] = 'required'  # noqa
         self.rpc_service.add(impl_NarrativeTest.status,
                              name='NarrativeTest.status',
                              types=[dict])

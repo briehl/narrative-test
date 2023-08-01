@@ -25,9 +25,9 @@ class NarrativeTest:
     # state. A method could easily clobber the state set by another while
     # the latter method is running.
     ######################################### noqa
-    VERSION = "0.0.2"
+    VERSION = "0.0.4"
     GIT_URL = "https://github.com/briehl/narrative-test"
-    GIT_COMMIT_HASH = "25496c5ebfdaec8045b5fd9049aeff5efd4a3834"
+    GIT_COMMIT_HASH = "0c2e5fe79a6ce25564adfc75457ce1f3d77f35ff"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -63,11 +63,11 @@ class NarrativeTest:
         #END test_async_job
 
         # At some point might do deeper type checking...
-        if not isinstance(params, dict):
+        if not isinstance(returnVal, dict):
             raise ValueError('Method test_async_job return value ' +
                              'returnVal is not type dict as required.')
         # return the results
-        return [params]
+        return [returnVal]
 
     def test_editor(self, ctx, editor, workspace):
         """
@@ -101,11 +101,11 @@ class NarrativeTest:
         #END save_reads_set_v1
 
         # At some point might do deeper type checking...
-        if not isinstance(inputs, object):
+        if not isinstance(outputs, object):
             raise ValueError('Method save_reads_set_v1 return value ' +
-                             'inputs is not type object as required.')
+                             'outputs is not type object as required.')
         # return the results
-        return [inputs]
+        return [outputs]
 
     def test_param_groups(self, ctx, params):
         """
@@ -124,11 +124,11 @@ class NarrativeTest:
         #END test_param_groups
 
         # At some point might do deeper type checking...
-        if not isinstance(params, dict):
+        if not isinstance(returnVal, dict):
             raise ValueError('Method test_param_groups return value ' +
-                             'params is not type dict as required.')
+                             'returnVal is not type dict as required.')
         # return the results
-        return [params]
+        return [returnVal]
 
     def test_input_mapping(self, ctx, params):
         """
@@ -143,11 +143,11 @@ class NarrativeTest:
         #END test_input_mapping
 
         # At some point might do deeper type checking...
-        if not isinstance(params, object):
+        if not isinstance(outputs, object):
             raise ValueError('Method test_input_mapping return value ' +
-                             'params is not type object as required.')
+                             'outputs is not type object as required.')
         # return the results
-        return [params]
+        return [outputs]
 
     def generic_test(self, ctx, params):
         """
@@ -160,11 +160,11 @@ class NarrativeTest:
         #END generic_test
 
         # At some point might do deeper type checking...
-        if not isinstance(params, object):
+        if not isinstance(outputs, object):
             raise ValueError('Method generic_test return value ' +
                              'outputs is not type object as required.')
         # return the results
-        return [params]
+        return [outputs]
 
     def import_reads_from_staging(self, ctx, params):
         """
@@ -384,6 +384,50 @@ class NarrativeTest:
         # At some point might do deeper type checking...
         if not isinstance(result, dict):
             raise ValueError('Method app_logs return value ' +
+                             'result is not type dict as required.')
+        # return the results
+        return [result]
+
+    def test_input_transform(self, ctx, params):
+        """
+        :param params: instance of type "InputTransformParams" -> structure:
+           parameter "input_obj_name" of String, parameter "input_obj_ref" of
+           type "workspace_ref", parameter "input_obj_unresolved_ref" of type
+           "workspace_ref", parameter "input_obj_resolved_ref" of type "upa",
+           parameter "input_obj_upa" of type "upa", parameter
+           "input_obj_names" of list of String, parameter "input_obj_refs" of
+           list of type "workspace_ref", parameter
+           "input_obj_unresolved_refs" of list of type "workspace_ref",
+           parameter "input_obj_resolved_refs" of list of type "upa",
+           parameter "input_obj_upas" of list of type "upa", parameter
+           "single_int" of Long, parameter "list_of_ints" of list of Long,
+           parameter "single_float" of Double, parameter "list_of_floats" of
+           list of Double, parameter "single_string_int" of String, parameter
+           "list_of_string_ints" of list of String
+        :returns: instance of type "InputTransformParams" -> structure:
+           parameter "input_obj_name" of String, parameter "input_obj_ref" of
+           type "workspace_ref", parameter "input_obj_unresolved_ref" of type
+           "workspace_ref", parameter "input_obj_resolved_ref" of type "upa",
+           parameter "input_obj_upa" of type "upa", parameter
+           "input_obj_names" of list of String, parameter "input_obj_refs" of
+           list of type "workspace_ref", parameter
+           "input_obj_unresolved_refs" of list of type "workspace_ref",
+           parameter "input_obj_resolved_refs" of list of type "upa",
+           parameter "input_obj_upas" of list of type "upa", parameter
+           "single_int" of Long, parameter "list_of_ints" of list of Long,
+           parameter "single_float" of Double, parameter "list_of_floats" of
+           list of Double, parameter "single_string_int" of String, parameter
+           "list_of_string_ints" of list of String
+        """
+        # ctx is the context object
+        # return variables are: result
+        #BEGIN test_input_transform
+        result = params
+        #END test_input_transform
+
+        # At some point might do deeper type checking...
+        if not isinstance(result, dict):
+            raise ValueError('Method test_input_transform return value ' +
                              'result is not type dict as required.')
         # return the results
         return [result]

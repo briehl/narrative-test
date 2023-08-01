@@ -16,6 +16,9 @@ module NarrativeTest {
     */
     typedef string workspace_name;
 
+    typedef string workspace_ref;
+    typedef string upa;
+
     /*
         A string representing a workspace id.
     */
@@ -198,8 +201,8 @@ module NarrativeTest {
       fail - boolean - if true, this always throws an error
     */
     typedef structure {
-      int naptime;
-      boolean fail;
+        int naptime;
+        boolean fail;
     } SleepParams;
 
     /*
@@ -209,16 +212,38 @@ module NarrativeTest {
     funcdef app_sleep(SleepParams param) returns (int naptime) authentication required;
 
     typedef structure {
-      int num_lines;
+        int num_lines;
     } AppLogParams;
 
     typedef structure {
-      int num_lines;
-      string prefix;
+        int num_lines;
+        string prefix;
     } AppLogResult;
 
     /*
       A simple app that puts out a number of log lines, one per second, until done. This way we can test the log viewer.
     */
     funcdef app_logs(AppLogParams param) returns (AppLogResult result) authentication required;
+
+
+    typedef structure {
+      string input_obj_name;
+      workspace_ref input_obj_ref;
+      workspace_ref input_obj_unresolved_ref;
+      upa input_obj_resolved_ref;
+      upa input_obj_upa;
+      list<string> input_obj_names;
+      list<workspace_ref> input_obj_refs;
+      list<workspace_ref> input_obj_unresolved_refs;
+      list<upa> input_obj_resolved_refs;
+      list<upa> input_obj_upas;
+      int single_int;
+      list<int> list_of_ints;
+      float single_float;
+      list<float> list_of_floats;
+      string single_string_int;
+      list<string> list_of_string_ints;
+    } InputTransformParams;
+
+    funcdef test_input_transform(InputTransformParams params) returns (InputTransformParams result) authentication required;
 };
