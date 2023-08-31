@@ -42,12 +42,24 @@
                 "checked_value": 1,
                 "unchecked_value": 0
             }
+        },
+        {
+            "id": "output_obj_name",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseGenomes.Genome" ],
+                "is_output_name": true
+            }
         }
     ],
     "parameter-groups": [
         {
           "id": "param_group",
-          "parameters": ["genome_ref", "free_text", "check"],
+          "parameters": ["genome_ref", "free_text", "check", "output_obj_name"],
           "optional": false,
           "allow_multiple": true,
           "with_border": true

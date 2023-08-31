@@ -42,6 +42,11 @@ parameters :
             A Checkbox.
         short-hint : |
             Check it. Or don't. I'm a tooltip, not your boss.
+    output_obj_name :
+        ui-name : |
+            Output object name
+        short-hint : |
+            Name of output object. Not like this really makes one.
 
 parameter-groups :
     param_group :

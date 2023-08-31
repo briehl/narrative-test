@@ -72,6 +72,7 @@ module NarrativeTest {
         string genome_ref;
         list<string> free_text;
         int check;
+        string output_obj_name;
     } SimpleParamGroup;
 
     typedef structure {
