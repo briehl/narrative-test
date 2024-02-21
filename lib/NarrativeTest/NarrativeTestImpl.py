@@ -157,6 +157,7 @@ class NarrativeTest:
         # ctx is the context object
         # return variables are: outputs
         #BEGIN generic_test
+        outputs = params
         #END generic_test
 
         # At some point might do deeper type checking...

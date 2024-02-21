@@ -1,0 +1,40 @@
+#
+# define display information
+#
+name: Disabled Parameter
+tooltip: |
+    A simple test app has a parameter that should be non-interactive.
+screenshots: []
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    unusable :
+        ui-name : |
+            No touching!
+        short-hint : |
+            An unchangeable parameter.
+    usable :
+        ui-name : |
+            Change me
+        short-hint : |
+            A changeable parameter.
+
+description : |
+    <p>This is a simple app (mostly a spec) intended for making sure the disable app parameter feature works.</p>

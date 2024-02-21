@@ -1,0 +1,52 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "wjriehl"
+    ],
+    "contact": "wjriehl@lbl.gov",
+    "visible": true,
+    "categories": ["active"],
+    "widgets": {
+        "input": null,
+        "output": "no-display"
+    },
+    "parameters": [
+        {
+            "id": "unusable",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "can't change this!" ],
+            "disabled": true,
+            "field_type": "text"
+        },
+        {
+            "id": "usable",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "disabled": false,
+            "field_type": "text",
+            "default_values": ["edit me"]
+        }
+    ],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "NarrativeTest",
+            "method": "generic_test",
+            "input_mapping": [
+                {
+                    "input_parameter": "unusable",
+                    "target_property": "unusable"
+                },
+                {
+                    "input_parameter": "usable",
+                    "target_property": "usable"
+                }
+            ],
+            "output_mapping": []
+        }
+    },
+    "job_id_output_field": "docker"
+}
